@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { expect, insertNewUser, test } from '../test-utils'
+import { expect, insertNewUser, test } from '../playwright-utils'
 import { createContactInfo, createUser } from '../../prisma/seed-utils'
 import { verifyLogin } from '~/utils/auth.server'
 
@@ -14,8 +14,6 @@ test('Users can update their basic info', async ({ login, page }) => {
 	await page
 		.getByRole('textbox', { name: /^username/i })
 		.fill(newUserData.username)
-	// TODO: support changing the email... probably test this in another test though
-	// await page.getByRole('textbox', {name: /^email/i}).fill(newUserData.email)
 
 	await page
 		.getByRole('textbox', { name: /^phone/i })

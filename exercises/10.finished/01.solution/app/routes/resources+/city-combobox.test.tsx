@@ -58,18 +58,13 @@ VALUES (@id, @name, @country, @latitude, @longitude, datetime('now'), datetime('
 
 	const RemixStub = createRemixStub([
 		{
-			id: 'root',
 			path: '/',
 			element: <App />,
 		},
 		{
-			id: 'resources-city-combobox',
 			path: '/resources/city-combobox',
-			loader: async args => {
-				const response = await loader(args as any)
-				const json = await response.json()
-				return json
-			},
+			// @ts-expect-error - Bug in Remix types: https://github.com/remix-run/remix/issues/6054
+			loader,
 		},
 	])
 

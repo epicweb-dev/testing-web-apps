@@ -6,7 +6,7 @@ import {
 	insertNewUser,
 	readEmail,
 	test,
-} from '../test-utils'
+} from '../playwright-utils'
 
 const urlRegex = /(?<url>https?:\/\/[^\s$.?#].[^\s]*)/
 function extractUrl(text: string) {
@@ -37,14 +37,9 @@ test('onboarding', async ({ page }) => {
 
 	await expect(page).toHaveURL(`/signup`)
 
-	const emailTextbox = page.getByRole('textbox', { name: /email/i })
-	await emailTextbox.click()
-	await emailTextbox.fill(loginForm.email)
+	await page.getByRole('textbox', { name: /email/i }).fill(loginForm.email)
 
 	await page.getByRole('button', { name: /launch/i }).click()
-	await expect(
-		page.getByRole('button', { name: /launch/i, disabled: true }),
-	).toBeVisible()
 	await expect(page.getByText(/check your email/i)).toBeVisible()
 
 	const email = await readEmail(loginForm.email)
@@ -92,13 +87,13 @@ test('onboarding', async ({ page }) => {
 test('login as existing user', async ({ page }) => {
 	const password = faker.internet.password()
 	const user = await insertNewUser({ password })
-	invariant(user.name, 'User name not found')
 	await page.goto('/login')
 	await page.getByRole('textbox', { name: /username/i }).fill(user.username)
 	await page.getByLabel(/^password$/i).fill(password)
 	await page.getByRole('button', { name: /log in/i }).click()
 	await expect(page).toHaveURL(`/`)
 
+	invariant(user.name, 'User name not found')
 	await expect(page.getByRole('link', { name: user.name })).toBeVisible()
 })
 
