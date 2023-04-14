@@ -5,7 +5,7 @@ let originalEncryptionSecret: string
 
 beforeEach(() => {
 	originalEncryptionSecret = process.env.ENCRYPTION_SECRET
-	process.env.ENCRYPTION_SECRET = 'testing-encryption-secret'
+	process.env.ENCRYPTION_SECRET = faker.random.alphaNumeric(30)
 })
 
 afterEach(() => {
