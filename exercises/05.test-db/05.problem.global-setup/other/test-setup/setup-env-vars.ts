@@ -1,4 +1,8 @@
-import { DATABASE_PATH, DATABASE_URL } from './paths'
+import path from 'path'
 
-process.env.DATABASE_PATH = DATABASE_PATH
-process.env.DATABASE_URL = DATABASE_URL
+// You'll move the calculation of these paths to a new file called ./paths.ts
+// so it can be used in multiple places.
+// 🐨 assign these environment variables to the values you export from ./paths.ts
+const databaseFile = `./prisma/test/data.db`
+process.env.DATABASE_PATH = path.join(process.cwd(), databaseFile)
+process.env.DATABASE_URL = `file:${process.env.DATABASE_PATH}?connection_limit=1`
