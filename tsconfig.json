@@ -5,6 +5,18 @@
   ],
   "references": [
     {
+      "path": "exercises/04.component/01.problem.initial-test"
+    },
+    {
+      "path": "exercises/04.component/01.solution.initial-test"
+    },
+    {
+      "path": "exercises/04.component/02.problem.setup"
+    },
+    {
+      "path": "exercises/04.component/02.solution.setup"
+    },
+    {
       "path": "exercises/05.test-db/01.problem.isolated"
     },
     {
