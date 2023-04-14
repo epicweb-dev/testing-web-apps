@@ -5,6 +5,15 @@
   ],
   "references": [
     {
+      "path": "exercises/01.e2e/01.problem.init"
+    },
+    {
+      "path": "exercises/01.e2e/01.solution.init"
+    },
+    {
+      "path": "exercises/01.e2e/05.solution"
+    },
+    {
       "path": "exercises/02.e2e-auth/01.problem.insert-user"
     },
     {
