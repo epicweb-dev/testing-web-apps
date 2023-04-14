@@ -5,6 +5,30 @@
   ],
   "references": [
     {
+      "path": "exercises/02.e2e-auth/01.problem.insert-user"
+    },
+    {
+      "path": "exercises/02.e2e-auth/01.solution.insert-user"
+    },
+    {
+      "path": "exercises/02.e2e-auth/02.problem.cleanup"
+    },
+    {
+      "path": "exercises/02.e2e-auth/02.solution.cleanup"
+    },
+    {
+      "path": "exercises/02.e2e-auth/03.problem.login-page"
+    },
+    {
+      "path": "exercises/02.e2e-auth/03.solution.login-page"
+    },
+    {
+      "path": "exercises/02.e2e-auth/04.problem.login-util"
+    },
+    {
+      "path": "exercises/02.e2e-auth/04.solution.login-util"
+    },
+    {
       "path": "exercises/03.unit/01.problem.unit"
     },
     {

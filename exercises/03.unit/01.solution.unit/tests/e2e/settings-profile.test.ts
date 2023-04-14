@@ -1,7 +1,8 @@
 import { faker } from '@faker-js/faker'
-import { expect, insertNewUser, test } from '../playwright-utils'
-import { createContactInfo, createUser } from '../../prisma/seed-utils'
+import invariant from 'tiny-invariant'
 import { verifyLogin } from '~/utils/auth.server'
+import { createContactInfo, createUser } from '../../prisma/seed-utils'
+import { expect, insertNewUser, test } from '../playwright-utils'
 
 test('Users can update their basic info', async ({ login, page }) => {
 	await login()
@@ -111,9 +112,9 @@ test('Users can update their profile photo', async ({ login, page }) => {
 	const user = await login()
 	await page.goto('/settings/profile')
 
-	const beforeSrc = await page
-		.getByAltText(user.name ?? user.username)
-		.getAttribute('src')
+	invariant(user.name, 'User must have a name to test profile photo')
+
+	const beforeSrc = await page.getByAltText(user.name).getAttribute('src')
 
 	await page.getByRole('link', { name: /change profile photo/i }).click()
 
@@ -134,9 +135,7 @@ test('Users can update their profile photo', async ({ login, page }) => {
 		'Was not redirected after saving the profile photo',
 	).toHaveURL(`/settings/profile`)
 
-	const afterSrc = await page
-		.getByAltText(user.name ?? user.username)
-		.getAttribute('src')
+	const afterSrc = await page.getByAltText(user.name).getAttribute('src')
 
 	expect(beforeSrc).not.toEqual(afterSrc)
 })
