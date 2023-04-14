@@ -114,8 +114,8 @@ as above.
   it's where you'll spend the bulk of your time.
 - `exercises/*.*/README.md`: Exercise background information
 - `exercises/*.*/*.problem.*/README.*.md`: Problem Instructions
-- `exercises/*.*/*.problem.*/*.tsx`: Exercise with Emoji helpers
-  (this is where the playground code comes from)
+- `exercises/*.*/*.problem.*/*.tsx`: Exercise with Emoji helpers (this is where
+  the playground code comes from)
 - `exercises/*.*/*.solution.*/*.tsx`: Solved version
 
 The purpose of the exercise is **not** for you to work through all the material.

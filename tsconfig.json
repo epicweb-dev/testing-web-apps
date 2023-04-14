@@ -5,10 +5,34 @@
   ],
   "references": [
     {
-      "path": "exercises/10.finished/01.problem"
+      "path": "exercises/05.test-db/01.problem.isolated"
     },
     {
-      "path": "exercises/10.finished/01.solution"
+      "path": "exercises/05.test-db/01.solution.isolated"
+    },
+    {
+      "path": "exercises/05.test-db/02.problem.setup-env"
+    },
+    {
+      "path": "exercises/05.test-db/02.solution.setup-env"
+    },
+    {
+      "path": "exercises/05.test-db/03.problem.delete-data"
+    },
+    {
+      "path": "exercises/05.test-db/03.solution.delete-data"
+    },
+    {
+      "path": "exercises/05.test-db/04.problem.setup-env-vars"
+    },
+    {
+      "path": "exercises/05.test-db/04.solution.setup-env-vars"
+    },
+    {
+      "path": "exercises/05.test-db/05.problem.global-setup"
+    },
+    {
+      "path": "exercises/05.test-db/05.solution.global-setup"
     }
   ]
 }
