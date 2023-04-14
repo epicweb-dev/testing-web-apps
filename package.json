@@ -25,6 +25,8 @@
   "dependencies": {
     "@kentcdodds/workshop-app": "^1.28.1",
     "@prisma/client": "^4.12.0",
+    "@radix-ui/react-popover": "^1.0.5",
+    "exercises.10.finished.01.solution": "*",
     "prisma": "^4.12.0"
   },
   "eslintIgnore": [
