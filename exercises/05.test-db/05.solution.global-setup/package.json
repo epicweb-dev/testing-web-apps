@@ -28,7 +28,8 @@
     "/node_modules",
     "/build",
     "/public/build",
-    "/playwright-report"
+    "/playwright-report",
+    "/server-build"
   ],
   "dependencies": {
     "@prisma/client": "^4.12.0",

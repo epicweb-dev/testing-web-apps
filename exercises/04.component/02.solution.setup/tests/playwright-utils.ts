@@ -1,5 +1,4 @@
 import { test as base, type Page } from '@playwright/test'
-import bcrypt from 'bcryptjs'
 import { parse } from 'cookie'
 import { z } from 'zod'
 import { authenticator, getPasswordHash } from '~/utils/auth.server'
