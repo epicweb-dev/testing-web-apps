@@ -20,10 +20,6 @@ export async function readEmail(recipient: string) {
 	}
 }
 
-export function deleteUserByUsername(username: string) {
-	return prisma.user.delete({ where: { username } })
-}
-
 // 🐨 export an async function called insertNewUser that takes an optional
 // password (if none is provided, just use the username as the password).
 //   💰 This isn't a prisma workshop, so if you want a *strong* hint, check below...

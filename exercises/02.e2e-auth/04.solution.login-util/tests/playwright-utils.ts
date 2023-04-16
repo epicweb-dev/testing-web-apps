@@ -29,10 +29,6 @@ export async function readEmail(recipient: string) {
 	}
 }
 
-export function deleteUserByUsername(username: string) {
-	return prisma.user.delete({ where: { username } })
-}
-
 export async function insertNewUser({ password }: { password?: string } = {}) {
 	const userData = createUser()
 	const user = await prisma.user.create({

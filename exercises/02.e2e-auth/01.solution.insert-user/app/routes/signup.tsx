@@ -102,10 +102,16 @@ export async function action({ request }: DataFunctionArgs) {
 	if (response.ok) {
 		return json({ status: 'success', errors: null } as const)
 	} else {
-		return json({
-			status: 'error',
-			errors: { formErrors: ['Email not sent successfully'], fieldErrors: {} },
-		} as const)
+		return json(
+			{
+				status: 'error',
+				errors: {
+					formErrors: ['Email not sent successfully'],
+					fieldErrors: {},
+				},
+			} as const,
+			{ status: 500 },
+		)
 	}
 }
 
@@ -123,12 +129,12 @@ export default function SignupRoute() {
 	})
 
 	return (
-		<div className="container mx-auto flex flex-col justify-center pt-20 pb-32">
+		<div className="container mx-auto flex flex-col justify-center pb-32 pt-20">
 			{signupFetcher.data?.status === 'success' ? (
 				<div className="text-center">
 					<img src="" alt="" />
-					<h1 className="mt-44 text-h1">Great!</h1>
-					<p className="mt-3 text-body-md text-night-200">
+					<h1 className="text-h1 mt-44">Great!</h1>
+					<p className="text-body-md text-night-200 mt-3">
 						Check your email for a link to continue.
 					</p>
 				</div>
@@ -136,7 +142,7 @@ export default function SignupRoute() {
 				<>
 					<div className="text-center">
 						<h1 className="text-h1">Let's start your journey!</h1>
-						<p className="mt-3 text-body-md text-night-200">
+						<p className="text-body-md text-night-200 mt-3">
 							Please enter your email.
 						</p>
 					</div>

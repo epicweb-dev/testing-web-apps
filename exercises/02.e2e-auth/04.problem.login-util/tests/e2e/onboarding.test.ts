@@ -2,11 +2,8 @@ import { faker } from '@faker-js/faker'
 // 🐨 swap expect and test with the versions exported by playwright-utils
 import { expect, test } from '@playwright/test'
 import invariant from 'tiny-invariant'
-import {
-	deleteUserByUsername,
-	insertNewUser,
-	readEmail,
-} from '../playwright-utils'
+import { prisma } from '~/utils/db.server'
+import { insertNewUser, readEmail } from '../playwright-utils'
 
 const urlRegex = /(?<url>https?:\/\/[^\s$.?#].[^\s]*)/
 function extractUrl(text: string) {
@@ -18,7 +15,7 @@ test('onboarding', async ({ page }) => {
 	const firstName = faker.name.firstName()
 	const lastName = faker.name.lastName()
 	const username = faker.internet.userName(firstName, lastName).slice(0, 15)
-	const loginForm = {
+	const onboardingData = {
 		name: `${firstName} ${lastName}`,
 		username,
 		email: `${username}@example.com`,
@@ -37,14 +34,14 @@ test('onboarding', async ({ page }) => {
 
 	await expect(page).toHaveURL(`/signup`)
 
-	await page.getByRole('textbox', { name: /email/i }).fill(loginForm.email)
+	await page.getByRole('textbox', { name: /email/i }).fill(onboardingData.email)
 
 	await page.getByRole('button', { name: /launch/i }).click()
 	await expect(page.getByText(/check your email/i)).toBeVisible()
 
-	const email = await readEmail(loginForm.email)
+	const email = await readEmail(onboardingData.email)
 	invariant(email, 'Email not found')
-	expect(email.to).toBe(loginForm.email)
+	expect(email.to).toBe(onboardingData.email)
 	expect(email.from).toBe('hello@rocketrental.space')
 	expect(email.subject).toMatch(/welcome/i)
 	const onboardingUrl = extractUrl(email.text)
@@ -54,13 +51,13 @@ test('onboarding', async ({ page }) => {
 	await expect(page).toHaveURL(`/onboarding`)
 	await page
 		.getByRole('textbox', { name: /^username/i })
-		.fill(loginForm.username)
+		.fill(onboardingData.username)
 
-	await page.getByRole('textbox', { name: /^name/i }).fill(loginForm.name)
+	await page.getByRole('textbox', { name: /^name/i }).fill(onboardingData.name)
 
-	await page.getByLabel(/^password/i).fill(loginForm.password)
+	await page.getByLabel(/^password/i).fill(onboardingData.password)
 
-	await page.getByLabel(/^confirm password/i).fill(loginForm.password)
+	await page.getByLabel(/^confirm password/i).fill(onboardingData.password)
 
 	await page.getByLabel(/terms/i).check()
 
@@ -72,16 +69,16 @@ test('onboarding', async ({ page }) => {
 
 	await expect(page).toHaveURL(`/`)
 
-	await page.getByRole('link', { name: loginForm.name }).click()
+	await page.getByRole('link', { name: onboardingData.name }).click()
 	await page.getByRole('menuitem', { name: /profile/i }).click()
 
-	await expect(page).toHaveURL(`/users/${loginForm.username}`)
+	await expect(page).toHaveURL(`/users/${onboardingData.username}`)
 
 	await page.getByRole('button', { name: /logout/i }).click()
 	await expect(page).toHaveURL(`/`)
 
 	// have to do this here because we didn't use insertNewUser (because we're testing user create)
-	await deleteUserByUsername(loginForm.username)
+	await prisma.user.delete({ where: { username } })
 })
 
 test('login as existing user', async ({ page }) => {

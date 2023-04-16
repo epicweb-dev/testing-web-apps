@@ -1,0 +1,23 @@
+import { faker } from '@faker-js/faker'
+import { expect, test } from '@playwright/test'
+
+test('onboarding', async ({ page }) => {
+	await page.goto('/')
+
+	await page.getByRole('link', { name: /log in/i }).click()
+	await expect(page).toHaveURL(`/login`)
+
+	const createAccountLink = page.getByRole('link', {
+		name: /create an account/i,
+	})
+	await createAccountLink.click()
+
+	await expect(page).toHaveURL(`/signup`)
+
+	await page
+		.getByRole('textbox', { name: /email/i })
+		.fill(faker.internet.email())
+
+	await page.getByRole('button', { name: /launch/i }).click()
+	await expect(page.getByText(/check your email/i)).toBeVisible()
+})
