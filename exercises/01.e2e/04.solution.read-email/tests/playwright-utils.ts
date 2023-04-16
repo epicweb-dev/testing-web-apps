@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { prisma } from '~/utils/db.server'
 import { readFixture } from '../mocks/utils'
 
 const emailSchema = z.object({
