@@ -1,1 +1,19 @@
 # First Playwright Test
+
+👨‍💼 Great job! Did you know, that single test has bought us an enormous amount of
+confidence? Now, we can run it before any deploy and we know that our
+application builds and runs successfully. Before this test, we had to do that
+manually. What a pain!
+
+If you'd like to see a situation where our test saves us, take this code:
+
+```ts
+app.use('/', (req, res, next) => {
+	return res.redirect('https://youtu.be/dQw4w9WgXcQ')
+})
+```
+
+And stick it in the <InlineFile file="server/index.ts" line="33" /> before the
+Remix `createRequestHandler` middleware. Then try running the test again.
+
+Now disgruntled employees can't cause major issues to our app so easily! 🕺

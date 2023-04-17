@@ -36,8 +36,6 @@ const miscHandlers = [
 	),
 ]
 
-const server = setupServer(...miscHandlers)
-
 server.listen({ onUnhandledRequest: 'warn' })
 console.info('🔶 Mock server installed')
 

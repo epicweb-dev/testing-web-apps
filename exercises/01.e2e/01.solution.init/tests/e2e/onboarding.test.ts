@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker'
 import { expect, test } from '@playwright/test'
 
 test('onboarding', async ({ page }) => {
@@ -12,4 +13,8 @@ test('onboarding', async ({ page }) => {
 	await createAccountLink.click()
 
 	await expect(page).toHaveURL(`/signup`)
+
+	await page
+		.getByRole('textbox', { name: /email/i })
+		.fill(faker.internet.email())
 })

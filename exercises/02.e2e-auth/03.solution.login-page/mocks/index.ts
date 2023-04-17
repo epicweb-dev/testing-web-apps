@@ -4,7 +4,7 @@ import closeWithGrace from 'close-with-grace'
 import { z } from 'zod'
 import { createFixture, requiredHeader } from './utils'
 
-const miscHandlers = [
+const server = setupServer(
 	rest.post(
 		'https://api.mailgun.net/v3/:domain/messages',
 		async (req, res, ctx) => {
@@ -28,9 +28,7 @@ const miscHandlers = [
 			return res(ctx.json({ id, message: 'Queued. Thank you.' }))
 		},
 	),
-]
-
-const server = setupServer(...miscHandlers)
+)
 
 server.listen({ onUnhandledRequest: 'warn' })
 console.info('🔶 Mock server installed')

@@ -1,1 +1,51 @@
 # First Playwright Test
+
+👨‍💼 We've got a great application, but as it's been growing we've been shipping
+more bugs. I'm not pointing fingers. The team has agreed that adding some basic
+tests would help us ship faster and more confidently, so we've asked you to
+write up our first test.
+
+The Playwright testing framework has already been configured for us in <InlineFile file="playwright.config.ts" />
+and we've got a script you can run to start the tests in UI Mode:
+
+```sh
+npm run test:e2e
+```
+
+We want to test our onboarding process (it's one of the most important parts of
+our app, so that's why we're giving it priority). Here are the current
+instructions we have for the first part of our manual test:
+
+1. Go to the homepage (<LinkToApp to="/" />)
+2. Click the link that says <LinkToApp to="/login">Log in</LinkToApp>.
+3. Verify the URL is <LinkToApp to="/login">`/login`</LinkToApp>.
+4. Click the link that says <LinkToApp to="/signup">Create an account</LinkToApp>.
+5. Verify the URL is <LinkToApp to="/signup">`/signup`</LinkToApp>.
+6. Fill in the email field with a random email (💰 you can use [`faker`](https://fakerjs.dev/) if you like).
+
+That's as far as we want you to go for this first test. Our tests go in the
+`tests/e2e` directory. You'll start by creating a new file there called <InlineFile file="tests/e2e/onboarding.test.ts" />.
+
+Once you've got that file created, go ahead and run the test script for E2E in UI Mode:
+
+```sh
+npm run test:e2e
+```
+
+If you'd rather simply run the test and get output in the terminal (without UI
+mode), you can run:
+
+```sh
+npm run test:e2e:run
+```
+
+Good luck! 📜 Don't forget the [Playwright Docs](https://playwright.dev/docs/writing-tests).
+
+💰 A few handy APIs you'll likely use:
+
+- [`page.goto`](https://playwright.dev/docs/api/class-page#page-goto)
+- [`page.getByRole`](https://playwright.dev/docs/locators#locate-by-role)
+- [`expect`](https://playwright.dev/docs/api/class-pageassertions)
+- [`toHaveURL`](https://playwright.dev/docs/api/class-pageassertions#page-assertions-to-have-url)
+- [`.click`](https://playwright.dev/docs/api/class-locator#locator-click)
+- [`.fill`](https://playwright.dev/docs/api/class-locator#locator-fill)
