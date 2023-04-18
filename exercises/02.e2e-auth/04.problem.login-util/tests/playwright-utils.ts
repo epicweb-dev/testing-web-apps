@@ -3,10 +3,8 @@
 // 🦺 You may as well grab the Page type here too. You'll need it for the
 // parameters of your loginPage function.
 import { test } from '@playwright/test'
-import { z } from 'zod'
 import { getPasswordHash } from '~/utils/auth.server'
 import { prisma } from '~/utils/db.server'
-import { readFixture } from '../mocks/utils'
 import { createContactInfo, createUser } from '../prisma/seed-utils'
 
 export const dataCleanup = {

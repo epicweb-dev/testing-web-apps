@@ -1,1 +1,7 @@
 # Data Cleanup
+
+👨‍💼 Every time someone creates a new user with our `insertUser` utility, we're
+making a change to the database that we should cleanup when we're finished.
+So could you keep track of all those users and then use
+[📜 `test.afterEach`](https://playwright.dev/docs/api/class-test#test-after-each)
+in our <InlineFile file="tests/playwright-utils.ts" /> to delete them?

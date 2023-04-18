@@ -1,7 +1,5 @@
-import { z } from 'zod'
 import { getPasswordHash } from '~/utils/auth.server'
 import { prisma } from '~/utils/db.server'
-import { readFixture } from '../mocks/utils'
 import { createContactInfo, createUser } from '../prisma/seed-utils'
 
 // 🐨 export a dataCleanup object with a users property that is a Set<string>
