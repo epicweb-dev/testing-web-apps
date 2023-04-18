@@ -1,23 +1,4 @@
-import { z } from 'zod'
-import { readFixture } from '../mocks/utils'
-
-const emailSchema = z.object({
-	to: z.string(),
-	from: z.string(),
-	subject: z.string(),
-	text: z.string(),
-	html: z.string(),
-})
-
-export async function readEmail(recipient: string) {
-	try {
-		const email = await readFixture('email', recipient)
-		return emailSchema.parse(email)
-	} catch (error) {
-		console.error(`Error reading email`, error)
-		return null
-	}
-}
+export { readEmail } from '../mocks/utils'
 
 // 🐨 export an async function called insertNewUser that takes an optional
 // password (if none is provided, just use the username as the password).

@@ -23,16 +23,10 @@
       "path": "exercises/01.e2e/03.solution.fixtures"
     },
     {
-      "path": "exercises/01.e2e/04.problem.read-email"
+      "path": "exercises/01.e2e/04.problem.cleanup"
     },
     {
-      "path": "exercises/01.e2e/04.solution.read-email"
-    },
-    {
-      "path": "exercises/01.e2e/05.problem.cleanup"
-    },
-    {
-      "path": "exercises/01.e2e/05.solution.cleanup"
+      "path": "exercises/01.e2e/04.solution.cleanup"
     },
     {
       "path": "exercises/02.e2e-auth/01.problem.insert-user"

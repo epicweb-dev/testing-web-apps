@@ -1,6 +1,6 @@
 # Fixtures
 
-When testing, you often need consistent data to work with. This is called a
+🦉 When testing, you often need consistent data to work with. This is called a
 ["Test fixture"](https://en.wikipedia.org/wiki/Test_fixture). Often, you really
 do want to generate the data you're working with as it makes the test more
 resilient to changes in the data and communicates intent better. That's the case
@@ -8,4 +8,28 @@ for everything we're doing currently so we're not going to use test fixtures
 today (though Rocket Rental eventually uses one for testing photo upload).
 
 However, we're going to (ab)use this concept to communicate between our tests
-and our mocks.
+and our mocks. Because our tests are running in a separate process from our
+application, we can't share data between the two processes (in fact, playwright
+can be used to test any application in any language). So, instead, we'll have
+our mock write a file in a "fixture" and then our test will read that file.
+
+👨‍💼 Your co-worker added a handy utility file at <InlineFile file="mocks/utils.ts" />
+which you can use to write and read a fixture. And because we'll be writing and
+reading email fixtures so much, they made one specifically for that. It even
+validates the data going in and out of the fixture for you.
+
+You can use it like this:
+
+```ts
+await writeEmail(email)
+```
+
+This will write a file at `mocks/fixtures/email/{email.to}.json` with the
+contents of the email. You can then read it back in your test like this:
+
+```ts
+const email = await readEmail('whoever@example.com')
+```
+
+So, in this step, we want you to update the MSW mock handler to write the email
+and then update the test to read it and proceed with the onboarding flow.

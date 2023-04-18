@@ -7,6 +7,7 @@ const server = setupServer(
 	rest.post(
 		'https://api.mailgun.net/v3/:domain/messages',
 		async (req, res, ctx) => {
+			// 🐨 swap this with the reusable "requiredHeader" function in ./utils
 			if (!req.headers.get('Authorization')) {
 				const headersString = JSON.stringify(
 					Object.fromEntries(req.headers.entries()),
@@ -18,6 +19,7 @@ const server = setupServer(
 				)
 			}
 			const bodyRaw = Object.fromEntries(new URLSearchParams(await req.text()))
+			// 💣 remove this because validation happens in our writeEmail utility
 			const body = z
 				.object({
 					to: z.string(),
@@ -28,6 +30,8 @@ const server = setupServer(
 				})
 				.parse(bodyRaw)
 			console.info('🔶 mocked email contents:', body)
+
+			// 🐨 call writeEmail from ./utils here
 
 			const randomId = '20210321210543.1.E01B8B612C44B41B'
 			const id = `<${randomId}>@${req.params.domain}`

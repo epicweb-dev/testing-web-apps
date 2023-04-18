@@ -98,6 +98,7 @@ const config: PlaywrightTestConfig = {
 
 	/* Run your local dev server before starting the tests */
 	webServer: {
+		// 🐨 swap "start" with "start:mocks"
 		command: process.env.CI
 			? `cross-env PORT=${PORT} npm run start`
 			: `cross-env PORT=${PORT} npm run dev`,
