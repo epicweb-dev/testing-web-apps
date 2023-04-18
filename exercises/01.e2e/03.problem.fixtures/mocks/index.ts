@@ -3,7 +3,7 @@ import { setupServer } from 'msw/node'
 import closeWithGrace from 'close-with-grace'
 import { z } from 'zod'
 
-const miscHandlers = [
+const server = setupServer(
 	rest.post(
 		'https://api.mailgun.net/v3/:domain/messages',
 		async (req, res, ctx) => {
@@ -34,7 +34,7 @@ const miscHandlers = [
 			return res(ctx.json({ id, message: 'Queued. Thank you.' }))
 		},
 	),
-]
+)
 
 server.listen({ onUnhandledRequest: 'warn' })
 console.info('🔶 Mock server installed')
