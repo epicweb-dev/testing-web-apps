@@ -1,1 +1,39 @@
 # Cleanup
+
+🦉 If you went to a restaurant and they put your food on the plate of the previous
+customer, it doesn't matter how delicious the meal is, you would probably not
+leave them very good reviews. The food may be good, but you can't tell that
+because the dirty nature of the experience spoiled it.
+
+When we run our tests, we very often make changes to the environment we're
+testing in. In our case, we're creating a new user. When the environment is
+shared between tests, we're kind of doing the same thing as that restaurant 🤮.
+Other tests may be impacted by the mess we've made. Failures would be
+intermittent and hard to debug.
+
+Test isolation is a way to prevent this and therefore a fundamental testing
+principle. There are a lot of layers to test isolation and we'll talk about
+others in future exercises. In our case, we don't want to reset the database
+every time we run our tests because that could be slow and since we're sharing
+our development database with the tests that would be annoying as
+well. Instead, we're going to just keep track of the data we create and delete
+that data when we're done.
+
+Luckily for us, our tests have access to the database, so we can do this in a
+pretty straightforward way.
+
+👨‍💼 Thanks Olivia! I'll take it from here. Normally you'll use hooks like
+`test.beforeEach` and `test.afterAll` etc. to do setup/teardown for tests in
+Playwright, however that wouldn't work too well for us since the test creates
+the user to be deleted so instead, we'll just do this at the bottom of our test:
+
+```ts
+await prisma.user.delete({ where: { username } })
+```
+
+Go ahead and stick that in there (`prisma` comes from
+`import { prisma } from '~/utils/db.server'`) and we should be good to go.
+
+If you want to verify you've got it working correctly, you can check the
+username of the user that's created in the test and make sure they don't appear
+when you go to their user page: <LinkToApp to="/users/:username" />
