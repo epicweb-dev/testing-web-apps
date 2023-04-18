@@ -1,1 +1,7 @@
 # Test Isolation
+
+👨‍💼 Super. Keeping these tests isolated in this way is often not an issue,
+especially since our vitest test files are normally run in parallel in
+completely different processes. But it's possible we may need to run them in the
+same process to debug stuff in the future and if we didn't think about cleanup
+now we'd be in trouble then.

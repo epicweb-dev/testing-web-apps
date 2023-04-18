@@ -1,1 +1,10 @@
 # Test Isolation
+
+👨‍💼 Our encryption function relies on an environment variable called
+`ENCRYPTION_SECRET`. We want to make sure that this is set for our tests, but
+we don't want to provide the real value. So let's set it to a fake value and
+then make certain that we reset it back to the value it was before (to avoid
+polluting the environment for other tests).
+
+You'll need to use [📜 `beforeEach`](https://vitest.dev/api/#beforeeach) and
+[📜 `afterEach`](https://vitest.dev/api/#aftereach) vitest hooks.
