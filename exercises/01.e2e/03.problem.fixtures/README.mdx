@@ -1,1 +1,11 @@
 # Fixtures
+
+When testing, you often need consistent data to work with. This is called a
+["Test fixture"](https://en.wikipedia.org/wiki/Test_fixture). Often, you really
+do want to generate the data you're working with as it makes the test more
+resilient to changes in the data and communicates intent better. That's the case
+for everything we're doing currently so we're not going to use test fixtures
+today (though Rocket Rental eventually uses one for testing photo upload).
+
+However, we're going to (ab)use this concept to communicate between our tests
+and our mocks.
