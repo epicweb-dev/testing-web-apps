@@ -1,1 +1,18 @@
 # Delete All Data
+
+🧝‍♂️ I've already written a handy function for you that handles deleting all the
+data we need in our tests. You can read through it if you like
+in <InlineFile file="other/test-setup/utils.ts" />, but it's unfortunately a
+little complicated because we can't just reset the entire database. If we did,
+we'd have to run migrations all over again. So instead, we query the database
+for all the tables and ensure we drop data in the proper order to avoid
+violating foreign key constraints.
+
+All you need to do is call that `deleteAllData` function at the right point,
+and you'll be set.
+
+💰 Script to run for this exercise:
+
+```sh
+npm run test -- city-combobox
+```

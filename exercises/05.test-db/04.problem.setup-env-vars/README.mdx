@@ -1,1 +1,18 @@
 # Set Env Vars Early
+
+🧝‍♂️ Our <InlineFile file="other/test-setup/setup-test-env.ts" line="34" /> file
+is still doing that annoying dynamic `import()` and we have to be careful that
+we don't `import` anything that requires these environment variables setup so
+let's change things a bit to make that nicer next...
+
+To do this, we'll create a new file
+called <InlineFile file="other/test-setup/setup-env-vars.ts" /> and set the
+environment variables in there, then we can add the import for that to the top
+of our setup file and we'll be able to import anything else after that without
+worrying about the environment variables not being set.
+
+💰 Script to run for this exercise:
+
+```sh
+npm run test -- city-combobox
+```

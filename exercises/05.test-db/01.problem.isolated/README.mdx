@@ -1,1 +1,47 @@
 # Create Isolated Database
+
+👨‍💼 We need to make sure our city combobox on the <LinkToApp to="/search" /> page
+never breaks. So, we'd like to test it...
+
+🧝‍♂️ I wrote a test
+in <InlineFile file="app/routes/resources+/city-combobox.test.tsx" /> that
+currently does not work.
+
+The first time you run it, you'll get an error like this:
+
+<callout-danger>
+  `AssertionError: expected [ <li …(4)>…(1)</li>, …(19) ] to have a length of 1 but got 20`
+</callout-danger>
+
+And the second time you run it you'll get an error like this:
+
+<callout-danger>
+	`SqliteError: UNIQUE constraint failed: City.id`
+</callout-danger>
+
+This is because the test is running against the same database as the app which
+we seeded a bunch of cities into. One of the first things the test does is
+create cities in the database so the results can be deterministic. However, to
+make this work, we need a unique and clean database for each test.
+
+We're going to iterate to a global setup solution. To start though, let's just
+get this test passing by itself. We need to make sure we set the proper
+environment variables before importing
+the <InlineFile file="app/utils/db.server" /> file, otherwise our test will
+connect to the wrong database, so this will involve moving some imports from
+static imports at the top of the file to dynamic imports within our test.
+
+Don't worry, we'll clean this up later.
+
+We'll also need to run migrations on the test database we setup. We'll use the
+[`execa`](https://npm.im/execa) package to do this.
+
+Once the test is over, we'll just delete the temporary test database file.
+
+We've got emoji friends to help us so go for it!
+
+💰 Script to run for this exercise:
+
+```sh
+npm run test -- city-combobox
+```

@@ -101,7 +101,7 @@ this project and add an environment variable called `KCDSHOP_EDITOR` with the
 value being set to the path to your editor's executable. For example, if you're
 using VS Code on Windows, you'd add this to your `.env` file:
 
-```
+```sh
 KCDSHOP_EDITOR="C:\Program Files\Microsoft VS Code\bin\code.cmd"
 ```
 

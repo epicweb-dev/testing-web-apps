@@ -1,1 +1,35 @@
 # Reusable Base Database
+
+🧝‍♂️ Right now, our test setup involves a hard coded test database at
+`prisma/test/data.db` which is created at the start and then deleted at the end
+with the data reset between each test. This could be a big problem for other
+tests that run in parallel and require the database. We need to make sure every
+test that's running has its own database.
+
+<callout-info className="aside">
+	When we say "test" in this context, we mean "test files" rather than `test()`
+	calls within a file. Test files run in separate processes with vitest, but
+	each `test()` call runs in the same process as other `test()` calls in that
+	file (because JavaScript is single threaded).
+</callout-info>
+
+Luckily for us, Vitest exposes a special environment variable to uniquely name
+our databases per test process, so we can generate a unique database name for
+each one. So we'll use that to create the database name to avoid these clashes.
+
+We also have another thing that's been annoying and that is the fact that we
+are running the migration script before each test. This adds a lot of time on
+our test run, so we're also going to have a global setup file that handles
+initializing a template database and we'll copy that one for each test (because
+copying a file is much faster).
+
+So in this exercise we'll be doing quite a few things at once, but doing them
+separately would be even more confusing. Luckily we've got emoji friends to help
+us out. You'll be creating two new files as well, so make sure to check the
+Files button at the bottom of these instructions.
+
+💰 Script to run for this exercise:
+
+```sh
+npm run test -- city-combobox
+```

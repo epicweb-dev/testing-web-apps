@@ -16,12 +16,28 @@ Here are some test titles to get you started:
 Oh, and because we're running these tests with vitest instead of playwright,
 you're going to need to use a new script:
 
-```
+```sh
 npm test
 ```
 
-If you run this before creating the first test file you'll get an error. So
-make sure you create the test file first.
+If you run this before creating the first test file you'll get an error:
+
+```txt nonumber nocopy nolang
+filter:  encryption
+include: ./app/**/*.test.{ts,tsx}
+exclude:  **/node_modules/**, **/dist/**, **/cypress/**, **/.{idea,git,cache,output,temp}/**, **/{karma,rollup,webpack,vite,vitest,jest,av
+a,babel,nyc,cypress,tsup,build}.config.*                                                                                                  watch exclude:  **/node_modules/**, **/dist/**
+
+No test files found, exiting with code 1
+```
+
+So make sure you create the test file first.
 
 We've already got everything setup and configured in <InlineFile file="vitest.config.ts" />
 so you should be good to go once you create the test file.
+
+💰 Script to run for this exercise:
+
+```sh
+npm run test -- encryption
+```

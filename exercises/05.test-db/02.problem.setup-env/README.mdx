@@ -1,1 +1,15 @@
 # Reuse Setup with setupFiles
+
+🧝‍♂️ For starters, let's just get things moved into our setup file so we don't
+have to do this nonsense in every test file. We've already got the `setupFiles`
+config in our <InlineFile file="vitest.config.ts" line="14" />, so now we just
+need to move things from <InlineFile file="app/routes/resources+/city-combobox.test.tsx" />
+into <InlineFile file="other/test-setup/setup-test-env.ts" />.
+
+Once we've done that, we can ditch the annoying dynamic imports in our tests 🎉
+
+💰 Script to run for this exercise:
+
+```sh
+npm run test -- city-combobox
+```
