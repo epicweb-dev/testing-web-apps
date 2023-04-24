@@ -8,6 +8,7 @@ import {
 	isProblemApp,
 	setPlayground,
 } from '@kentcdodds/workshop-app/build/utils/apps.server.js'
+import { getWatcher } from '@kentcdodds/workshop-app/build/utils/change-tracker.js'
 
 // getApps expects this env var
 process.env.NODE_ENV = 'development'
@@ -16,6 +17,7 @@ const allApps = await getApps()
 const uniqueApps = allApps.filter(
 	(a, index) => allApps.findIndex(b => b.fullPath === a.fullPath) === index,
 )
+const problemApps = allApps.filter(isProblemApp)
 
 const dataDbPath = path.join(process.cwd(), 'data.db')
 if (await fsExtra.exists(dataDbPath)) {
@@ -36,7 +38,6 @@ for (const app of uniqueApps) {
 console.log('✅ .env files copied')
 
 console.log('◭  generating prisma client...')
-const problemApps = allApps.filter(isProblemApp)
 // we just grab the last problem app and set that one up because we're setup to
 // have all the exercise apps share a single database and prisma has a
 // postinstall that sets up the client in each individual app anyway.
@@ -110,3 +111,5 @@ if (firstProblemApp) {
 		},
 	)
 }
+
+getWatcher().close()
