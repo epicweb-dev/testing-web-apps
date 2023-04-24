@@ -76,6 +76,7 @@ Please do ask! Interrupt me. If you have an unrelated question, please ask on
 - **Barry the Bomb** 💣 "Remove this code"
 - **Peter the Product Manager** 👨‍💼 "Story time"
 - **Alfred the Alert** 🚨 "Extra helpful in test errors"
+- **Kellie the Co-worker** 🧝‍♀️ "Your co-worker"
 
 ## Workshop Feedback
 

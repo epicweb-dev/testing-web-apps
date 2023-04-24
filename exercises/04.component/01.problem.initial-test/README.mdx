@@ -1,1 +1,25 @@
 # Initial Component Test
+
+👨‍💼 Our renter and host profile pages use a shared component called
+`UserProfileBasicInfo` and that includes a fair bit of complex logic around what
+is displayed for the chat link. It all depends on whether the user's logged in,
+if they're looking at their own profile or someone else's profile, and if a chat
+already exists between the user they're looking at and themselves. Here are all
+the test cases we need to write (eventually):
+
+- Link to chat is a form if user is logged in, is not self, and no chat exists yet
+- Link to chat is link to specific chat if logged in, not self, and there is a history
+- Link to chat is link to all chats if viewing it myself
+- Link to chat is links to login if user is not logged in
+
+For this first bit, we'll just focus on the first case. 🧝‍♀️ Kellie already created
+the file for you and you've got a bunch of comments in there from our friends,
+so let's get started!
+
+It my be handy for you to check out where this component is used in the app,
+you'll find it in <InlineFile file="app/routes/users_+/$username.host.tsx" line="173" />
+and in <InlineFile file="app/routes/users_+/$username.renter.tsx" line="118" />.
+
+In our test, we'll be focusing in on the chat link, so you can feel free to pass
+fake data to the component for most of the props and we'll even make a fake user
+for the user prop so we can easily test the logic around that.

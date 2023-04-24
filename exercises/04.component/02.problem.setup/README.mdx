@@ -1,1 +1,14 @@
 # Setup Function
+
+🧝‍♀️ We've got a lot of duplication in our code now and I'd like you to think
+about how we can thoughtfully reduce that duplication to make it easier to make
+new tests and maintain the existing ones.
+
+Make sure to follow the advise in Kent's article
+["AHA Testing"](https://kentcdodds.com/blog/aha-testing) to help you think about
+how to refactor the code. The primary duplication is in getting thing setup
+so I'd like you to look at creating a `setup` function that you can call in each
+test. Just make sure to put only what's necessary in there and return only what
+the tests all need.
+
+We've got our emoji friends in there to guide you so let's get to it.

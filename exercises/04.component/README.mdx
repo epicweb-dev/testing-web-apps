@@ -1,1 +1,154 @@
 # Component Testing
+
+As usual, when testing React components we want to focus on our two users:
+
+1. The end user who's typing in the fields and clicking the buttons
+2. The developer user who's rendering our component with props
+
+We want to avoid a "third" user I call the
+["Test User"](https://kentcdodds.com/blog/avoid-the-test-user) (as we've already
+discussed). So we want to avoid mocking out React and other hooks if we can help
+it. We'll do that by using the `render` function from `@testing-library/react`.
+
+[`@testing-library/react`](https://testing-library.com/react)
+(a library I wrote when preparing a workshop like this!!) is a set of utilities
+that allow you to embrace our testing philosophy:
+
+> The more your tests resemble the way your software is used, the more confidence they can give you. - [@kentcdodds](https://twitter.com/kentcdodds/status/977018512689455106)
+
+So, if this is your first time using `@testing-library/react`, I recommend
+having the documentation open and ready to reference as you go through this
+and the next exercise (especially
+[the page about queries](https://testing-library.com/docs/queries/about)). Much
+of it will feel familiar to what we did in the Playwright exercises because
+Playwright's queries were inspired by Testing Library's queries 🎉.
+
+Here's the simplest example of a test using Testing Library:
+
+```tsx filename=app.test.tsx
+import * as React from 'react'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+
+function Counter() {
+	const [count, setCount] = React.useState(0)
+	const increment = () => setCount(c => c + 1)
+	return <button onClick={increment}>Count: {count}</button>
+}
+
+test('counter increments when clicked', async () => {
+	render(<Counter />)
+	const button = screen.getByRole('button', { name: /count:/i })
+	expect(button).toHaveTextContent('Count: 0')
+	await userEvent.click(button)
+	expect(button).toHaveTextContent('Count: 1')
+})
+```
+
+If you've not used `@testing-library/react` before, I recommend you check out
+[the Quick start Example in the docs](https://testing-library.com/docs/react-testing-library/example-intro)
+which should give you a pretty good idea of how to use it effectively.
+
+I've you've used Testing Library in the past, you may be interested in reading
+[Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
+as you may be making them yourself (don't feel bad, they're common 😅).
+
+## Remix
+
+When our components are rendered, they are using a context provider from Remix.
+When we try to render our components in our test, things like `useLoaderData`
+and `<Link>` will expect to have that context available. The tricky bit with
+Remix is that so much of what you're doing relies on the routing layer which
+often involves loaders and actions.
+
+So, the Remix team is working on a great solution for this called
+`createRemixStub` which allows you to create a mini-remix app that you can
+render in your test and have all the routes you need for testing the component.
+This is a work in progress, but should be released quite soon. As that is the
+case, there is no documentation and the API we use has an `unstable_` prefix.
+However, it's unlikely to experience many (or even any) breaking changes before
+the release. Here are your "docs" for that:
+
+```tsx filename=app/routes/counter.test.tsx
+import { useLoaderData } from '@remix-run/react'
+import { db } from 'utils/db.server'
+
+export async function loader() {
+	return json({ count: await db.getCount() })
+}
+
+export async function action() {
+	await db.incrementCount()
+	return redirect('/counter')
+}
+
+export default function Counter() {
+	const data = useLoaderData<typeof loader>()
+	return (
+		<Form method="post">
+			<button type="submit">Count: {data.count}</button>
+		</Form>
+	)
+}
+```
+
+```tsx filename=app/counter.test.tsx
+import * as React from 'react'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { json, redirect } from '@remix-run/node'
+import { unstable_createRemixStub as createRemixStub } from '@remix-run/testing'
+import Counter from './counter'
+
+test('counter increments when clicked', async () => {
+	let count = 0
+	const App = createRemixStub([
+		{
+			path: '/counter',
+			element: Counter,
+			loader: () => json({ count }),
+			action: () => {
+				count = count + 1
+				return redirect('/counter')
+			},
+		},
+	])
+	const button = screen.getByRole('button', { name: /count:/i })
+	expect(button).toHaveTextContent('Count: 0')
+	await userEvent.click(button)
+	expect(button).toHaveTextContent('Count: 1')
+})
+```
+
+It's pretty neat that we can test the UI component with some mocked backend
+logic, however, I'm often interested in testing the component holistically, so
+we can actually import and use the original `action` and `loader` from the route
+as well:
+
+```tsx filename=app/counter.test.tsx
+import * as React from 'react'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+// 👇 import the loader and action
+import Counter, { loader, action } from './counter'
+import { unstable_createRemixStub as createRemixStub } from '@remix-run/testing'
+
+test('counter increments when clicked', async () => {
+	const App = createRemixStub([
+		{
+			path: '/counter',
+			element: Counter,
+			// 👇 use the original loader and action
+			loader,
+			action,
+		},
+	])
+	const button = screen.getByRole('button', { name: /count:/i })
+	expect(button).toHaveTextContent('Count: 0')
+	await userEvent.click(button)
+	expect(button).toHaveTextContent('Count: 1')
+})
+```
+
+The trick here is to make sure you've got a database working in your test, which
+we'll cover more in the next exercise.

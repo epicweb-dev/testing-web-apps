@@ -122,7 +122,7 @@ The purpose of the exercise is **not** for you to work through all the material.
 It's intended to get your brain thinking about the right questions to ask me as
 _I_ walk through the material.
 
-## Helpful Emoji 🐨 🦺 💰 📝 🦉 📜 💣 💪 🏁 👨‍💼 🚨
+## Helpful Emoji 🐨 🦺 💰 📝 🦉 📜 💣 💪 🏁 👨‍💼 🚨 🧝‍♀️
 
 Each exercise has comments in it to help you get through the exercise. These fun
 emoji characters are here to help you.
@@ -144,6 +144,8 @@ emoji characters are here to help you.
 - **Peter the Product Manager** 👨‍💼 helps us know what our users want
 - **Alfred the Alert** 🚨 will occasionally show up in the test failures with
   potential explanations for why the tests are failing
+- **Kellie the Co-worker** 🧝‍♀️ your co-worker who sometimes does work ahead of
+  your exercises
 
 ## Workshop Feedback
 

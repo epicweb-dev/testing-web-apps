@@ -13,7 +13,7 @@ application, we can't share data between the two processes (in fact, playwright
 can be used to test any application in any language). So, instead, we'll have
 our mock write a file in a "fixture" and then our test will read that file.
 
-👨‍💼 Your co-worker added a handy utility file at <InlineFile file="mocks/utils.ts" />
+🧝‍♀️ I've added a handy utility file at <InlineFile file="mocks/utils.ts" />
 which you can use to write and read a fixture. And because we'll be writing and
 reading email fixtures so much, they made one specifically for that. It even
 validates the data going in and out of the fixture for you.
@@ -31,5 +31,5 @@ contents of the email. You can then read it back in your test like this:
 const email = await readEmail('whoever@example.com')
 ```
 
-So, in this step, we want you to update the MSW mock handler to write the email
-and then update the test to read it and proceed with the onboarding flow.
+👨‍💼 So, in this step, we want you to update the MSW mock handler to write the
+email and then update the test to read it and proceed with the onboarding flow.
