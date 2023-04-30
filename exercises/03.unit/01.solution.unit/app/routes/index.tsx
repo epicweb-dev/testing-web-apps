@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { useRef, useState } from 'react'
 import { Spacer } from '~/components/spacer'
 import { ButtonLink } from '~/utils/forms'
-import styles from './index.module.css'
+import styles from '../styles/index.module.css'
 
 export default function Index() {
 	return (
