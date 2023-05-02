@@ -167,6 +167,11 @@ script like we're doing now.
 Open <InlineFile file="playwright.config.ts" line="102" /> and update the `webServer`
 where it's using the `start` script to use the `start:mocks` script instead.
 
+<callout-warning>
+	Note: because you're changing playwright config, you will probably need to
+	restart the tests.
+</callout-warning>
+
 ## 🎉 Congratulations!
 
 Now you should be able to run the tests and they'll pass!

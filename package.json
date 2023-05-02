@@ -26,7 +26,7 @@
   "author": "Kent C. Dodds <me@kentcdodds.com> (https://kentcdodds.com/)",
   "license": "GPL-3.0-only",
   "dependencies": {
-    "@kentcdodds/workshop-app": "^1.34.5",
+    "@kentcdodds/workshop-app": "^1.35.0",
     "@prisma/client": "^4.13.0",
     "@radix-ui/react-popover": "^1.0.5",
     "prisma": "^4.13.0"
