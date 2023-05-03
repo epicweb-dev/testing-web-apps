@@ -5,7 +5,7 @@ import pkg from '../package.json'
 
 const here = (...s: Array<string>) => path.join(__dirname, ...s)
 
-const allFiles = glob.sync(here('../server/**/*.*'), {
+const allFiles = glob.sync(here('../server/**/*.*').replace(/\\/g, '/'), {
 	ignore: ['**/tsconfig.json', '**/eslint*', '**/__tests__/**'],
 })
 
@@ -26,7 +26,9 @@ console.log('building...')
 
 require('esbuild')
 	.build({
-		entryPoints: glob.sync(here('../server/**/*.+(ts|js|tsx|jsx)')),
+		entryPoints: glob.sync(
+			here('../server/**/*.+(ts|js|tsx|jsx)').replace(/\\/g, '/'),
+		),
 		outdir: here('../server-build'),
 		target: [`node${pkg.engines.node}`],
 		platform: 'node',
