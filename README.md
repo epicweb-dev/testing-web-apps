@@ -1,5 +1,5 @@
 <div>
-  <h1 align="center"><a href="https://kentcdodds.com/workshops/testing-web-apps">🧪 Testing Web Apps</a></h1>
+  <h1 align="center"><a href="https://kentcdodds.com/workshops/testing-web-applications">🧪 Testing Web Apps</a></h1>
   <strong>
     Ship confidently knowing your test suite will stop you from shipping bugs.
   </strong>

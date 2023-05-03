@@ -13,6 +13,9 @@ test('Users can update their basic info', async ({ page }) => {
 
 	// 🐨 get the page context and add a cookie to it using the baseURL with
 	// similar cookie configuration as found in '~/utils/session.server'
+	// 💰 there's no "secrets" config option necessary for playwright
+	// 💰 the sameSite is "Lax" instead of "lax"
+	// 💰 the url option should be baseURL
 	// 💰 importantly, the value should be the _session value from step 5
 
 	await page.goto('/settings/profile')

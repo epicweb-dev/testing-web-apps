@@ -126,8 +126,8 @@ Great, now we can enable the mocks when starting up the app. This will be done i
 1. Setting the `MOCKS` environment variable
 2. Importing the `mocks/index.ts` file
 
-In the <InlineFile file="package.json" />, update the `dev:server` script to add
-`cross-env MOCKS=true ` to the beginning of the command.
+In the <InlineFile file="package.json" line="12" />, update the `dev:server`
+script to add `cross-env MOCKS=true ` to the beginning of the command.
 (📜 [cross-env](https://www.npmjs.com/package/cross-env)).
 
 Now, open <InlineFile file="index.js" /> and conditionally require the `mocks`
@@ -143,8 +143,8 @@ Great! Now if you restart the server, the mocks log ("🔶 Mock server installed
 should appear. This means we're ready to intercept requests.
 
 We occasionally want to run the built server in production mode, but with mocks
-enabled, so add this script to the `package.json` (💰 I stuck it below the
-regular `start` script):
+enabled, so add this script to the <InlineFile file="package.json" line="18" />
+(💰 I stuck it below the regular `start` script):
 
 ```json filename=package.json
 {
@@ -186,14 +186,15 @@ message.
 <details>
 	<summary>Click here if you're not getting app logs</summary>
 
-    <div style={{paddingLeft: 24, borderLeft: '1.5px solid #ddd'}}>
-    If you aren't getting any logs for the application, it's possible you're
-    not running the server and playwright separately. Playwright will run the server
-    for you if it's not running already, but it swallows the logs. So you'll want to
-    have the playground server running (which you can do in the app and then logs will
-    appear in the terminal you're running the app in) and then run the tests in a different
-    terminal.
-    </div>
+<div style={{ paddingLeft: 24, borderLeft: '1.5px solid #ddd' }}>
+	If you aren't getting any logs for the application, it's possible you're not
+	running the server and playwright separately. Playwright will run the server
+	for you if it's not running already, but it swallows the logs (until [this is
+	released](https://github.com/microsoft/playwright/pull/22564)). So you'll want
+	to have the playground server running in one terminal (running `npm run dev
+	--prefix playground` should do it) and then run the tests in a different
+	terminal.
+</div>
 
 </details>
 
