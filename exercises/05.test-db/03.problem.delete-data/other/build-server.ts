@@ -3,7 +3,8 @@ import path from 'path'
 import glob from 'glob'
 import pkg from '../package.json'
 
-const here = (...s: Array<string>) => path.join(__dirname, ...s)
+const here = (...s: Array<string>) =>
+	path.join(__dirname, ...s).replace(/\\/g, '/')
 
 const allFiles = glob.sync(here('../server/**/*.*'), {
 	ignore: ['**/tsconfig.json', '**/eslint*', '**/__tests__/**'],
