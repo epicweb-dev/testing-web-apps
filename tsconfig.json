@@ -11,100 +11,100 @@
       "path": "exercises/01.e2e/01.solution.init"
     },
     {
-      "path": "exercises/01.e2e/02.problem.mocks"
+      "path": "exercises/02.http-mocking/01.problem.setup"
     },
     {
-      "path": "exercises/01.e2e/02.solution.mocks"
+      "path": "exercises/02.http-mocking/01.solution.setup"
     },
     {
-      "path": "exercises/01.e2e/03.problem.fixtures"
+      "path": "exercises/02.http-mocking/02.problem.fixtures"
     },
     {
-      "path": "exercises/01.e2e/03.solution.fixtures"
+      "path": "exercises/02.http-mocking/02.solution.fixtures"
     },
     {
-      "path": "exercises/01.e2e/04.problem.cleanup"
+      "path": "exercises/02.http-mocking/03.problem.cleanup"
     },
     {
-      "path": "exercises/01.e2e/04.solution.cleanup"
+      "path": "exercises/02.http-mocking/03.solution.cleanup"
     },
     {
-      "path": "exercises/02.e2e-auth/01.problem.insert-user"
+      "path": "exercises/03.e2e-auth/01.problem.insert-user"
     },
     {
-      "path": "exercises/02.e2e-auth/01.solution.insert-user"
+      "path": "exercises/03.e2e-auth/01.solution.insert-user"
     },
     {
-      "path": "exercises/02.e2e-auth/02.problem.cleanup"
+      "path": "exercises/03.e2e-auth/02.problem.cleanup"
     },
     {
-      "path": "exercises/02.e2e-auth/02.solution.cleanup"
+      "path": "exercises/03.e2e-auth/02.solution.cleanup"
     },
     {
-      "path": "exercises/02.e2e-auth/03.problem.login-page"
+      "path": "exercises/03.e2e-auth/03.problem.login-page"
     },
     {
-      "path": "exercises/02.e2e-auth/03.solution.login-page"
+      "path": "exercises/03.e2e-auth/03.solution.login-page"
     },
     {
-      "path": "exercises/02.e2e-auth/04.problem.login-util"
+      "path": "exercises/03.e2e-auth/04.problem.login-util"
     },
     {
-      "path": "exercises/02.e2e-auth/04.solution.login-util"
+      "path": "exercises/03.e2e-auth/04.solution.login-util"
     },
     {
-      "path": "exercises/03.unit/01.problem.unit"
+      "path": "exercises/04.unit/01.problem.unit"
     },
     {
-      "path": "exercises/03.unit/01.solution.unit"
+      "path": "exercises/04.unit/01.solution.unit"
     },
     {
-      "path": "exercises/03.unit/02.problem.isolation"
+      "path": "exercises/04.unit/02.problem.isolation"
     },
     {
-      "path": "exercises/03.unit/02.solution.isolation"
+      "path": "exercises/04.unit/02.solution.isolation"
     },
     {
-      "path": "exercises/04.component/01.problem.initial-test"
+      "path": "exercises/05.component/01.problem.initial-test"
     },
     {
-      "path": "exercises/04.component/01.solution.initial-test"
+      "path": "exercises/05.component/01.solution.initial-test"
     },
     {
-      "path": "exercises/04.component/02.problem.setup"
+      "path": "exercises/05.component/02.problem.setup"
     },
     {
-      "path": "exercises/04.component/02.solution.setup"
+      "path": "exercises/05.component/02.solution.setup"
     },
     {
-      "path": "exercises/05.test-db/01.problem.isolated"
+      "path": "exercises/06.test-db/01.problem.isolated"
     },
     {
-      "path": "exercises/05.test-db/01.solution.isolated"
+      "path": "exercises/06.test-db/01.solution.isolated"
     },
     {
-      "path": "exercises/05.test-db/02.problem.setup-env"
+      "path": "exercises/06.test-db/02.problem.setup-env"
     },
     {
-      "path": "exercises/05.test-db/02.solution.setup-env"
+      "path": "exercises/06.test-db/02.solution.setup-env"
     },
     {
-      "path": "exercises/05.test-db/03.problem.delete-data"
+      "path": "exercises/06.test-db/03.problem.delete-data"
     },
     {
-      "path": "exercises/05.test-db/03.solution.delete-data"
+      "path": "exercises/06.test-db/03.solution.delete-data"
     },
     {
-      "path": "exercises/05.test-db/04.problem.setup-env-vars"
+      "path": "exercises/06.test-db/04.problem.setup-env-vars"
     },
     {
-      "path": "exercises/05.test-db/04.solution.setup-env-vars"
+      "path": "exercises/06.test-db/04.solution.setup-env-vars"
     },
     {
-      "path": "exercises/05.test-db/05.problem.global-setup"
+      "path": "exercises/06.test-db/05.problem.global-setup"
     },
     {
-      "path": "exercises/05.test-db/05.solution.global-setup"
+      "path": "exercises/06.test-db/05.solution.global-setup"
     }
   ]
 }
