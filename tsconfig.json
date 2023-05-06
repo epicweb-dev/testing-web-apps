@@ -47,10 +47,10 @@
       "path": "exercises/03.e2e-auth/03.solution.login-page"
     },
     {
-      "path": "exercises/03.e2e-auth/04.problem.login-util"
+      "path": "exercises/03.e2e-auth/04.problem.login-fixture"
     },
     {
-      "path": "exercises/03.e2e-auth/04.solution.login-util"
+      "path": "exercises/03.e2e-auth/04.solution.login-fixture"
     },
     {
       "path": "exercises/04.unit/01.problem.unit"

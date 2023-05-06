@@ -5,6 +5,14 @@ in <InlineFile file="tests/e2e/settings-profile.test.ts" />, but I didn't
 finish. We still need to make sure the page is authenticated before the test can
 run.
 
+If you'd like, you can see what we're testing by following these steps:
+
+1. Go to <LinkToApp to="/login" /> and login with Kody's profile.
+   Username: `kody`, password: `kodylovesyou`.
+1. Go to <LinkToApp to="/settings/profile" />
+
+Our tests are testing this page.
+
 You can check <InlineFile file="app/utils/auth.server.ts" />
 and <InlineFile file="app/utils/session.server.ts" /> to get an idea of how
 authentication works in our app, but I'll just say that we use an HTTP-only,
