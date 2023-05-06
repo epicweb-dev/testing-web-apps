@@ -80,3 +80,12 @@ reference as you work through the exercises.
 Vitest's command line interface (a "CLI" is the thing you run in the terminal)
 has a cool watch mode that will automatically re-run your tests when you save
 your files.
+
+## Remix
+
+One of the neat things about Remix `action`s and `loader`s is that they accept
+a standard `request` object and return a standard `response` object (though in
+some cases they `throw` a `response` object). However, they are not typically
+"pure" functions because they often perform fetch requests or communicate with
+a database. So mocking HTTP requests or establishing a test database is often
+necessary (we'll do that later).

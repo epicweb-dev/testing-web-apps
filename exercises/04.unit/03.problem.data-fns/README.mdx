@@ -1,0 +1,74 @@
+# Remix Data Functions
+
+👨‍💼 We have had some issues with images not getting deleted properly and it's
+going to start filling up our database if we don't deal with it. 🧝‍♂️ Kellie has
+already fixed the bug, but we'd like you to test the functionality.
+
+You can find the code for this in <InlineFile file="app/routes/resources+/delete-image.tsx" />.
+It's a fairly simple resource route with an action that handles authenticating
+the request, checking that the request is valid, finding the image to delete,
+and deleting it.
+
+To get started, we just want you to write the happy-path test.
+
+🧝‍♂️ I'll give you a hand, here's a simple example of testing a Remix loader:
+
+```tsx filename=app/routes/projects.tsx
+import { json, type DataFunctionArgs } from '@remix-run/node'
+import { useLoaderData } from '@remix-run/react'
+import { db } from '~/utils/db.server'
+
+export async function loader({ request }: DataFunctionArgs) {
+	const projects = await db.getProjects()
+	return json({ projects })
+}
+
+export default function Projects() {
+	const data = useLoaderData<typeof loader>()
+
+	return <ul>{/* ... */}</ul>
+}
+```
+
+```ts filename=app/routes/projects.test.tsx
+import { test } from 'vitest'
+import { faker } from '@faker-js/faker'
+import { db } from '~/utils/db.server'
+import { loader } from './projects'
+
+test('returns a list of projects', async () => {
+	const projects = [
+		{
+			id: faker.datatype.uuid(),
+			name: faker.lorem.words(),
+			description: faker.lorem.paragraph(),
+		},
+		{
+			id: faker.datatype.uuid(),
+			name: faker.lorem.words(),
+			description: faker.lorem.paragraph(),
+		},
+	]
+	await db.createProjects(projects)
+
+	const request = new Request('/projects', { method: 'GET' })
+	const response = await loader({ request, params: {}, context: {} })
+
+	expect(response.status).toBe(200)
+	expect(await response.json()).toEqual({ projects })
+})
+```
+
+The idea in this case is to put some test data in the database, then create a
+request object, pass it to the loader, and assert on the response. That's pretty
+much it.
+
+It can be a bit more tricky if you're testing a Remix data function that
+requires the request to be authenticated, but you can figure that out, I
+promise. (💰 I'll help).
+
+💰 Script to run for this exercise:
+
+```sh
+npm run test -- delete-image
+```

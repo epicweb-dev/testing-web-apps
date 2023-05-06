@@ -65,6 +65,18 @@
       "path": "exercises/04.unit/02.solution.isolation"
     },
     {
+      "path": "exercises/04.unit/03.problem.data-fns"
+    },
+    {
+      "path": "exercises/04.unit/03.solution.data-fns"
+    },
+    {
+      "path": "exercises/04.unit/04.problem.setup"
+    },
+    {
+      "path": "exercises/04.unit/04.solution.setup"
+    },
+    {
       "path": "exercises/05.component/01.problem.initial-test"
     },
     {
