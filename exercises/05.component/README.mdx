@@ -49,20 +49,21 @@ If you've not used `@testing-library/react` before, I recommend you check out
 [the Quick start Example in the docs](https://testing-library.com/docs/react-testing-library/example-intro)
 which should give you a pretty good idea of how to use it effectively.
 
-I've you've used Testing Library in the past, you may be interested in reading
+If you've used Testing Library in the past, you may be interested in reading
 [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
 as you may be making them yourself (don't feel bad, they're common 😅).
 
 ## Remix
 
-When our components are rendered, they are using a context provider from Remix.
-When we try to render our components in our test, things like `useLoaderData`
-and `<Link>` will expect to have that context available. The tricky bit with
-Remix is that so much of what you're doing relies on the routing layer which
-often involves loaders and actions.
+When our components are rendered, they are using a
+[context provider](https://react.dev/learn/passing-data-deeply-with-context)
+from Remix. When we try to render our components in our test, things like
+`useLoaderData` and `<Link>` will expect to have that context available. The
+tricky bit with Remix is that so much of what you're doing relies on the routing
+layer which often involves loaders and actions.
 
 So, the Remix team is working on a great solution for this called
-`createRemixStub` which allows you to create a mini-remix app that you can
+`createRemixStub` which allows you to create a mini-Remix app that you can
 render in your test and have all the routes you need for testing the component.
 This is a work in progress, but should be released quite soon. As that is the
 case, there is no documentation and the API we use has an `unstable_` prefix.

@@ -45,9 +45,9 @@ export default function ChatsRoute() {
 	const user = useUser()
 	return (
 		<div className="container mx-auto mb-20 h-[70vh]">
-			<div className="mt-8 flex h-full rounded-3xl bg-night-500">
-				<div className="w-[424px] border-r-[1.5px] border-r-night-400">
-					<div className="flex h-20 items-center border-b-[1.5px] border-b-night-400 px-8">
+			<div className="bg-night-500 mt-8 flex h-full rounded-3xl">
+				<div className="border-r-night-400 w-[424px] border-r-[1.5px]">
+					<div className="border-b-night-400 flex h-20 items-center border-b-[1.5px] px-8">
 						<h1 className="text-h5">Messages</h1>
 					</div>
 					<ul className="mt-6 w-full overflow-y-scroll">
@@ -61,7 +61,7 @@ export default function ChatsRoute() {
 											clsx(
 												'flex h-20 w-full gap-4 px-8 py-3',
 												isActive
-													? 'is-active group bg-night-400'
+													? 'is-active bg-night-400 group'
 													: 'hover:bg-night-600 focus:bg-night-600',
 											)
 										}
@@ -83,12 +83,14 @@ export default function ChatsRoute() {
 														stringify: u => u.name ?? u.username,
 													})}
 												</div>
-												<time className="whitespace-nowrap text-xs text-night-300">
-													{chat.messages[0].formattedDate}
-												</time>
+												{chat.messages.length ? (
+													<time className="text-night-300 whitespace-nowrap text-xs">
+														{chat.messages[0].formattedDate}
+													</time>
+												) : null}
 											</div>
-											<div className="line-clamp-1 text-sm text-night-200 group-[.is-active]:text-white">
-												{chat.messages[0].content}
+											<div className="text-night-200 line-clamp-1 text-sm group-[.is-active]:text-white">
+												{chat.messages[0]?.content}
 											</div>
 										</div>
 									</NavLink>

@@ -1,11 +1,30 @@
 # Initial Component Test
 
-👨‍💼 Our renter and host profile pages use a shared component called
-`UserProfileBasicInfo` and that includes a fair bit of complex logic around what
-is displayed for the chat link. It all depends on whether the user's logged in,
-if they're looking at their own profile or someone else's profile, and if a chat
-already exists between the user they're looking at and themselves. Here are all
-the test cases we need to write (eventually):
+👨‍💼 I need you to check out our renter and host profiles really quick, because
+we're going to test those out. You'll need to login as a user who is a host and
+a renter and you'll want to look at other users' profiles as well as your own
+so you can check the different states of the chat link for this test.
+
+In this workshop, we have a special route that will allow you to find all the
+users of the app. 🐨 So, follow these steps:
+
+1. Open <LinkToApp to="/admin/users/list" />
+1. Select a user who is has a renter and host profile
+1. Open their profile. Their username is also their password (remember, this is
+   just seed data).
+1. Notice that since you're logged out, the chat link directs you to the login
+   page with a redirect back to this profile.
+1. Click the link and login as that user (using their username as their password)
+1. You should be redirected to that profile again and you'll notice that the
+   chat link is now a link to the chat page.
+1. Open <LinkToApp to="/admin/users/list" /> and select a different user who is
+   a renter and host.
+1. Notice that the chat link is now a form submission button.
+1. Click that and it'll start a new chat.
+1. Go back to their profile and the chat link is now a link to your chat with them.
+
+Phew, that's a lot of variations on the chat link! Here are the variations
+written out:
 
 - Link to chat is a form if user is logged in, is not self, and no chat exists yet
 - Link to chat is link to specific chat if logged in, not self, and there is a history
@@ -16,6 +35,10 @@ For this first bit, we'll just focus on the first case. 🧝‍♀️ Kellie alr
 the file for you and you've got a bunch of comments in there from our friends,
 so let's get started!
 
+👨‍💼 Our renter and host profile pages use a shared component called
+`UserProfileBasicInfo` and that includes a fair bit of complex logic around what
+is displayed for the chat link.
+
 It my be handy for you to check out where this component is used in the app,
 you'll find it in <InlineFile file="app/routes/users_+/$username.host.tsx" line="173" />
 and in <InlineFile file="app/routes/users_+/$username.renter.tsx" line="118" />.
@@ -23,6 +46,11 @@ and in <InlineFile file="app/routes/users_+/$username.renter.tsx" line="118" />.
 In our test, we'll be focusing in on the chat link, so you can feel free to pass
 fake data to the component for most of the props and we'll even make a fake user
 for the user prop so we can easily test the logic around that.
+
+Keep in mind that our component relies heavily on Remix provided context, so
+you'll need to have the `createRemixStub` function from `@remix-run/testing`.
+If you need to reference an example, check [the primary instructions](/05) for
+this exercise.
 
 💰 Script to run for this exercise:
 
