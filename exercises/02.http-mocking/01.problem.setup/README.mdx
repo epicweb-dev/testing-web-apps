@@ -14,22 +14,8 @@ API to send an email, we're going to intercept that request during development
 and testing to prevent it from actually sending an email and instead log the
 email contents to the console.
 
-🦉 I've got some words about this...
-
-<callout-danger>
-	Whenever you make a fake version of something during testing, you're losing
-	confidence!
-</callout-danger>
-
-Make certain there's a legitimate benefit for that cost of confidence. Making a
-fake version of something in testing is called "mocking" and is often necessary,
-but goes against the principle of ensuring your tests resemble the way the
-software is used.
-
-Read more about this in [The Merits of Mocking](https://kentcdodds.com/blog/the-merits-of-mocking).
-
-👨‍💼 Thanks Olivia... Back to the task! We have a number of things we need done.
-We'll list them out here and go into detail below:
+To get this setup, we have a number of things we need done. We'll list them out
+here and go into detail below:
 
 1. We've already installed [MSW](https://mswjs.io/), but it needs to be
    configured.
