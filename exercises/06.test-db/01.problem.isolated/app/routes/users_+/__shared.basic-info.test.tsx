@@ -31,7 +31,7 @@ function setup(
 			),
 		},
 	])
-	const routeUrl = `/users/${user}/host`
+	const routeUrl = `/users/${user.username}/host`
 	render(<App initialEntries={[routeUrl]} />)
 	return { routeUrl }
 }

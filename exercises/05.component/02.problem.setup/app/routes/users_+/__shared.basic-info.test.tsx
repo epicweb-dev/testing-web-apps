@@ -32,7 +32,7 @@ test('Link to chat is a form if user is logged in, is not self, and no chat exis
 		},
 	])
 
-	const routeUrl = `/users/${user}/host`
+	const routeUrl = `/users/${user.username}/host`
 	render(<App initialEntries={[routeUrl]} />)
 
 	const startChatButton = await screen.findByRole('button', {
@@ -73,7 +73,7 @@ test('Link to chat is link to specific chat if logged in, not self, and there is
 		},
 	])
 
-	const routeUrl = `/users/${user}/host`
+	const routeUrl = `/users/${user.username}/host`
 	render(<App initialEntries={[routeUrl]} />)
 
 	const chatLink = await screen.findByRole('link', {
@@ -107,7 +107,7 @@ test('Link to chat is link to all chats if viewing it myself along with edit pro
 		},
 	])
 
-	const routeUrl = `/users/${user}/host`
+	const routeUrl = `/users/${user.username}/host`
 	render(<App initialEntries={[routeUrl]} />)
 
 	const myChatLink = await screen.findByRole('link', {
@@ -145,7 +145,7 @@ test('Link to chat is links to login if user is not logged in', async () => {
 		},
 	])
 
-	const routeUrl = `/users/${user}/host`
+	const routeUrl = `/users/${user.username}/host`
 	render(<App initialEntries={[routeUrl]} />)
 
 	const messageLink = await screen.findByRole('link', {

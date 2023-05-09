@@ -29,7 +29,7 @@ test('Link to chat is a form if user is logged in, is not self, and no chat exis
 		},
 	])
 
-	const routeUrl = `/users/${user}/host`
+	const routeUrl = `/users/${user.username}/host`
 	render(<App initialEntries={[routeUrl]} />)
 
 	const startChatButton = await screen.findByRole('button', {
