@@ -1,7 +1,7 @@
 import { Link } from '@remix-run/react'
 import * as Separator from '@radix-ui/react-separator'
-import { getShipImgSrc } from '~/utils/misc'
-import { StarRatingDisplay } from './star-rating-display'
+import { getShipImgSrc } from '~/utils/misc.ts'
+import { StarRatingDisplay } from './star-rating-display.tsx'
 
 export function ShipCard({
 	ship,

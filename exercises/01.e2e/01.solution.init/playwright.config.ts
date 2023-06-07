@@ -1,17 +1,9 @@
 import { devices, type PlaywrightTestConfig } from '@playwright/test'
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-require('dotenv').config()
+import 'dotenv/config'
 
 const PORT = process.env.PORT || 3000
 
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
-const config: PlaywrightTestConfig = {
+export default {
 	testDir: './tests/e2e',
 	/* Maximum time one test can run for. */
 	timeout: 30 * 1000,
@@ -103,7 +95,7 @@ const config: PlaywrightTestConfig = {
 			: `cross-env PORT=${PORT} npm run dev`,
 		port: Number(PORT),
 		reuseExistingServer: true,
+		stdout: 'pipe',
+		stderr: 'pipe',
 	},
-}
-
-export default config
+} satisfies PlaywrightTestConfig

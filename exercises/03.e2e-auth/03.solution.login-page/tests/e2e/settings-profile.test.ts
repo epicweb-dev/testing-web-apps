@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test'
 import { parse } from 'cookie'
-import { authenticator } from '~/utils/auth.server'
-import { commitSession, getSession } from '~/utils/session.server'
-import { createContactInfo, createUser } from '../../prisma/seed-utils'
-import { insertNewUser } from '../playwright-utils'
+import { authenticator } from '~/utils/auth.server.ts'
+import { commitSession, getSession } from '~/utils/session.server.ts'
+import { createContactInfo, createUser } from '../../prisma/seed-utils.ts'
+import { insertNewUser } from '../playwright-utils.ts'
 
 test('Users can update their basic info', async ({ page, baseURL }) => {
 	const user = await insertNewUser()

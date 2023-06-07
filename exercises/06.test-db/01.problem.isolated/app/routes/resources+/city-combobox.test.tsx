@@ -1,15 +1,15 @@
 import { type City } from '@prisma/client'
 import { unstable_createRemixStub as createRemixStub } from '@remix-run/testing'
 import { act, render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { userEvent } from '~/utils/user-event.cjs'
 import * as React from 'react'
-import { test } from 'vitest'
+import { expect, test, vi } from 'vitest'
 // 🐨 changes these to dynamic imports and move them into the test callback
 // so they aren't imported until we've had a chance to set the env vars
-// 💰 const { db } = await import('~/utils/db.server')
-// 💰 const { CityCombobox, loader } = await import('./city-combobox')
-import { db } from '~/utils/db.server'
-import { CityCombobox, loader } from './city-combobox'
+// 💰 const { db } = await import('~/utils/db.server.ts')
+// 💰 const { CityCombobox, loader } = await import('./city-combobox.tsx')
+import { db } from '~/utils/db.server.ts'
+import { CityCombobox, loader } from './city-combobox.tsx'
 
 // 🐨 set env vars here: DATABASE_PATH and DATABASE_URL
 // 💰 process.env.DATABASE_PATH = path.join(process.cwd(), databaseFile)
@@ -20,10 +20,14 @@ import { CityCombobox, loader } from './city-combobox'
 // 💰 'prisma migrate reset --force --skip-seed --skip-generate'
 
 // 🐨 add an afterEach that deletes all the cities from the database
-// 💰 const { db } = await import('~/utils/db.server')
+// 💰 const { db } = await import('~/utils/db.server.ts')
 // 💰 db.exec(`DELETE FROM city;`)
 
 // 🐨 add an afterAll that removes the database file
+// 🐨 close and disconnect the database before your remove it
+// 💰 const { db, prisma } = await import('~/utils/db.server.ts')
+// 💰 db.close()
+// 💰 await prisma.$disconnect()
 // 💰 await fsExtra.remove(process.env.DATABASE_PATH)
 // 💰 get fsExtra from 'fs-extra' (https://npm.im/fs-extra)
 
@@ -91,7 +95,6 @@ test('allows you to search for cities in the database', async () => {
 		{
 			id: 'resources-city-combobox',
 			path: '/resources/city-combobox',
-			// @ts-expect-error - this is a bug in the types that will be fixed soon.
 			loader,
 		},
 	])

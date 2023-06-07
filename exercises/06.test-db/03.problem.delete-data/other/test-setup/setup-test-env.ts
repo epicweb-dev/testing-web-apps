@@ -1,19 +1,10 @@
+import { afterAll, afterEach, beforeAll, expect } from 'vitest'
 import { installGlobals } from '@remix-run/node'
-import matchers, {
-	type TestingLibraryMatchers,
-} from '@testing-library/jest-dom/matchers'
+import { matchers } from './matchers.cjs'
 import 'dotenv/config'
 import fsExtra from 'fs-extra'
 import path from 'path'
 import { execaCommand } from 'execa'
-
-declare global {
-	namespace Vi {
-		interface JestAssertion<T = any>
-			extends jest.Matchers<void, T>,
-				TestingLibraryMatchers<T, void> {}
-	}
-}
 
 expect.extend(matchers)
 
@@ -31,11 +22,14 @@ beforeAll(async () => {
 })
 
 afterEach(async () => {
-	const { db } = await import('~/utils/db.server')
+	const { db } = await import('~/utils/db.server.ts')
 	// 🐨 replace this with a call to deleteAllData from './utils'
 	db.exec(`DELETE FROM city;`)
 })
 
 afterAll(async () => {
+	const { db, prisma } = await import('~/utils/db.server.ts')
+	db.close()
+	await prisma.$disconnect()
 	await fsExtra.remove(process.env.DATABASE_PATH)
 })

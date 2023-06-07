@@ -1,9 +1,9 @@
-require('dotenv/config')
+import 'dotenv/config'
 
-// 🐨 require the ./mocks module if process.env.MOCKS === 'true'
+// 🐨 import the ./mocks module if process.env.MOCKS === 'true'
 
 if (process.env.NODE_ENV === 'production') {
-	require('./server-build')
+	await import('./server-build/index.js')
 } else {
-	require('./server')
+	await import('./server/index.ts')
 }

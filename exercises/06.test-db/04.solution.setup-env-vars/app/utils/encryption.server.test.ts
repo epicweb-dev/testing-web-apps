@@ -2,13 +2,14 @@
  * @vitest-environment node
  */
 import { faker } from '@faker-js/faker'
-import { encrypt, decrypt } from './encryption.server'
+import { encrypt, decrypt } from './encryption.server.ts'
+import { afterEach, beforeEach, expect, test } from 'vitest'
 
 let originalEncryptionSecret: string
 
 beforeEach(() => {
 	originalEncryptionSecret = process.env.ENCRYPTION_SECRET
-	process.env.ENCRYPTION_SECRET = faker.random.alphaNumeric(30)
+	process.env.ENCRYPTION_SECRET = faker.string.alphanumeric(30)
 })
 
 afterEach(() => {

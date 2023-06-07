@@ -3,12 +3,12 @@
  */
 import { faker } from '@faker-js/faker'
 import fs from 'fs'
-import { createPassword, createUser } from 'prisma/seed-utils'
-import { BASE_URL, getUserSetCookieHeader } from 'tests/vitest-utils'
+import { createPassword, createUser } from 'prisma/seed-utils.ts'
+import { BASE_URL, getUserSetCookieHeader } from 'tests/vitest-utils.ts'
 import invariant from 'tiny-invariant'
 import { expect, test } from 'vitest'
-import { prisma } from '~/utils/db.server'
-import { ROUTE_PATH, action } from './delete-image'
+import { prisma } from '~/utils/db.server.ts'
+import { ROUTE_PATH, action } from './delete-image.tsx'
 
 const RESOURCE_URL = `${BASE_URL}${ROUTE_PATH}`
 
@@ -61,7 +61,7 @@ test('allows users to delete their own images', async () => {
 
 test('requires auth', async () => {
 	const form = new FormData()
-	form.set('imageId', faker.datatype.uuid())
+	form.set('imageId', faker.string.uuid())
 	const request = new Request(RESOURCE_URL, {
 		method: 'POST',
 		body: form,
@@ -150,7 +150,7 @@ test('cannot delete an image that does not exist', async () => {
 	invariant(user.imageId, 'User should have an image')
 	const cookie = await getUserSetCookieHeader(user)
 	const form = new FormData()
-	form.set('imageId', faker.datatype.uuid())
+	form.set('imageId', faker.string.uuid())
 	const request = new Request(RESOURCE_URL, {
 		method: 'POST',
 		headers: { cookie },

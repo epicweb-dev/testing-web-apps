@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker'
 import invariant from 'tiny-invariant'
-import { verifyLogin } from '~/utils/auth.server'
-import { createContactInfo, createUser } from '../../prisma/seed-utils'
-import { expect, insertNewUser, test } from '../playwright-utils'
+import { verifyLogin } from '~/utils/auth.server.ts'
+import { createContactInfo, createUser } from '../../prisma/seed-utils.ts'
+import { expect, insertNewUser, test } from '../playwright-utils.ts'
 
 test('Users can update their basic info', async ({ login, page }) => {
 	await login()

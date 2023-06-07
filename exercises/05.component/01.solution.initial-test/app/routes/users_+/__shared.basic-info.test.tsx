@@ -1,15 +1,15 @@
-import { test } from 'vitest'
+import { expect, test } from 'vitest'
 import { faker } from '@faker-js/faker'
 import { render, screen } from '@testing-library/react'
 import { unstable_createRemixStub as createRemixStub } from '@remix-run/testing'
-import { UserProfileBasicInfo } from './__shared'
+import { UserProfileBasicInfo } from './__shared.tsx'
 import invariant from 'tiny-invariant'
 
 test('Link to chat is a form if user is logged in, is not self, and no chat exists yet', async () => {
 	const user = {
-		imageId: faker.datatype.uuid(),
+		imageId: faker.string.uuid(),
 		username: faker.internet.userName(),
-		name: faker.name.fullName(),
+		name: faker.person.fullName(),
 	}
 	const App = createRemixStub([
 		{

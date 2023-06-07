@@ -2,9 +2,9 @@ import { faker } from '@faker-js/faker'
 // 🐨 swap the expect and test here for the ones from playwright-utils
 import { expect, test } from '@playwright/test'
 import invariant from 'tiny-invariant'
-import { verifyLogin } from '~/utils/auth.server'
-import { createContactInfo, createUser } from '../../prisma/seed-utils'
-import { insertNewUser, loginPage } from '../playwright-utils'
+import { verifyLogin } from '~/utils/auth.server.ts'
+import { createContactInfo, createUser } from '../../prisma/seed-utils.ts'
+import { insertNewUser, loginPage } from '../playwright-utils.ts'
 
 // 🐨 access the login utility just like you do the page in this params list:
 // 💰 you're not going to need the baseURL here anymore.
@@ -128,7 +128,7 @@ test('Users can update their profile photo', async ({ page }) => {
 	const user = {
 		id: faker.datatype.uuid(),
 		username: faker.internet.userName(),
-		name: faker.name.fullName(),
+		name: faker.person.fullName(),
 	}
 	await page.goto('/settings/profile')
 

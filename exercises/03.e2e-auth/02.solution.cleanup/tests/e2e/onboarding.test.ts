@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker'
 import { expect, test } from '@playwright/test'
 import invariant from 'tiny-invariant'
-import { prisma } from '~/utils/db.server'
-import { insertNewUser, readEmail } from '../playwright-utils'
+import { prisma } from '~/utils/db.server.ts'
+import { insertNewUser, readEmail } from '../playwright-utils.ts'
 
 const urlRegex = /(?<url>https?:\/\/[^\s$.?#].[^\s]*)/
 function extractUrl(text: string) {
@@ -11,9 +11,9 @@ function extractUrl(text: string) {
 }
 
 test('onboarding', async ({ page }) => {
-	const firstName = faker.name.firstName()
-	const lastName = faker.name.lastName()
-	const username = faker.internet.userName(firstName, lastName).slice(0, 15)
+	const firstName = faker.person.firstName()
+	const lastName = faker.person.lastName()
+	const username = faker.internet.userName({ firstName, lastName }).slice(0, 15)
 	const onboardingData = {
 		name: `${firstName} ${lastName}`,
 		username,

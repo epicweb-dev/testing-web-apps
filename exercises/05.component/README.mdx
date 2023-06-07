@@ -28,7 +28,7 @@ Here's the simplest example of a test using Testing Library:
 ```tsx filename=app.test.tsx
 import * as React from 'react'
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { userEvent } from '~/utils/user-event.cjs'
 
 function Counter() {
 	const [count, setCount] = React.useState(0)
@@ -96,7 +96,7 @@ export default function Counter() {
 ```tsx filename=app/counter.test.tsx
 import * as React from 'react'
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { userEvent } from '~/utils/user-event.cjs'
 import { json, redirect } from '@remix-run/node'
 import { unstable_createRemixStub as createRemixStub } from '@remix-run/testing'
 import Counter from './counter'
@@ -129,7 +129,7 @@ as well:
 ```tsx filename=app/counter.test.tsx
 import * as React from 'react'
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { userEvent } from '~/utils/user-event.cjs'
 // 👇 import the loader and action
 import Counter, { loader, action } from './counter'
 import { unstable_createRemixStub as createRemixStub } from '@remix-run/testing'
