@@ -1,9 +1,8 @@
 {
 	"include": [
-		"remix.env.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
-		"./other/test-setup/setup-test-env.ts"
+		"**/*.cjs",
 	],
 	"compilerOptions": {
 		"lib": ["DOM", "DOM.Iterable", "ES2022"],
