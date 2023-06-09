@@ -1,21 +1,12 @@
-import './setup-env-vars'
+import './setup-env-vars.ts'
+import { afterAll, afterEach, beforeAll, expect } from 'vitest'
 import { installGlobals } from '@remix-run/node'
-import matchers, {
-	type TestingLibraryMatchers,
-} from '@testing-library/jest-dom/matchers'
+import { matchers } from './matchers.cjs'
 import 'dotenv/config'
 import fsExtra from 'fs-extra'
-import { db } from '~/utils/db.server'
+import { db, prisma } from '~/utils/db.server.ts'
 import { execaCommand } from 'execa'
-import { deleteAllData } from './utils'
-
-declare global {
-	namespace Vi {
-		interface JestAssertion<T = any>
-			extends jest.Matchers<void, T>,
-				TestingLibraryMatchers<T, void> {}
-	}
-}
+import { deleteAllData } from './utils.ts'
 
 expect.extend(matchers)
 
@@ -33,5 +24,7 @@ afterEach(() => {
 })
 
 afterAll(async () => {
+	db.close()
+	await prisma.$disconnect()
 	await fsExtra.remove(process.env.DATABASE_PATH)
 })

@@ -1,17 +1,17 @@
-import { test } from 'vitest'
+import { expect, test } from 'vitest'
 import { faker } from '@faker-js/faker'
 import { render, screen } from '@testing-library/react'
 import { unstable_createRemixStub as createRemixStub } from '@remix-run/testing'
-import { UserProfileBasicInfo } from './__shared'
+import { UserProfileBasicInfo } from './__shared.tsx'
 import invariant from 'tiny-invariant'
 
 function setup(
 	props?: Partial<React.ComponentProps<typeof UserProfileBasicInfo>>,
 ) {
 	const user = {
-		imageId: faker.datatype.uuid(),
+		imageId: faker.string.uuid(),
 		username: faker.internet.userName(),
-		name: faker.name.fullName(),
+		name: faker.person.fullName(),
 	}
 	const App = createRemixStub([
 		{
@@ -55,7 +55,7 @@ test('Link to chat is a form if user is logged in, is not self, and no chat exis
 })
 
 test('Link to chat is link to specific chat if logged in, not self, and there is a history', async () => {
-	const oneOnOneChatId = faker.datatype.uuid()
+	const oneOnOneChatId = faker.string.uuid()
 	setup({ isSelf: false, userLoggedIn: true, oneOnOneChatId })
 	const chatLink = await screen.findByRole('link', {
 		name: /message/i,
@@ -81,9 +81,10 @@ test('Link to chat is links to login if user is not logged in', async () => {
 		userLoggedIn: false,
 		oneOnOneChatId: null,
 	})
-	const messageLink = await screen.findByRole('link', {
-		name: /message/i,
-	})
+	const links = await screen.findAllByRole('link', { name: /message/i })
+	const messageLink = links.find(
+		l => l.getAttribute('title') === 'Login to message',
+	)
 	expect(messageLink).toHaveAttribute(
 		'href',
 		`/login?${new URLSearchParams({ redirectTo: routeUrl })}`,

@@ -1,8 +1,8 @@
-import { test } from 'vitest'
+import { expect, test } from 'vitest'
 import { faker } from '@faker-js/faker'
 import { render, screen } from '@testing-library/react'
 import { unstable_createRemixStub as createRemixStub } from '@remix-run/testing'
-import { UserProfileBasicInfo } from './__shared'
+import { UserProfileBasicInfo } from './__shared.tsx'
 import invariant from 'tiny-invariant'
 
 // 🐨 create a setup function does everything that's common between all the tests
@@ -10,9 +10,9 @@ import invariant from 'tiny-invariant'
 test('Link to chat is a form if user is logged in, is not self, and no chat exists yet', async () => {
 	// 🐨 call setup here and delete the stuff setup handles
 	const user = {
-		imageId: faker.datatype.uuid(),
+		imageId: faker.string.uuid(),
 		username: faker.internet.userName(),
-		name: faker.name.fullName(),
+		name: faker.person.fullName(),
 	}
 	const App = createRemixStub([
 		{
@@ -49,11 +49,11 @@ test('Link to chat is a form if user is logged in, is not self, and no chat exis
 
 test('Link to chat is link to specific chat if logged in, not self, and there is a history', async () => {
 	// 🐨 call setup here and delete the stuff setup handles
-	const oneOnOneChatId = faker.datatype.uuid()
+	const oneOnOneChatId = faker.string.uuid()
 	const user = {
-		imageId: faker.datatype.uuid(),
+		imageId: faker.string.uuid(),
 		username: faker.internet.userName(),
-		name: faker.name.fullName(),
+		name: faker.person.fullName(),
 	}
 	const App = createRemixStub([
 		{
@@ -85,9 +85,9 @@ test('Link to chat is link to specific chat if logged in, not self, and there is
 test('Link to chat is link to all chats if viewing it myself along with edit profile link', async () => {
 	// 🐨 call setup here and delete the stuff setup handles
 	const user = {
-		imageId: faker.datatype.uuid(),
+		imageId: faker.string.uuid(),
 		username: faker.internet.userName(),
-		name: faker.name.fullName(),
+		name: faker.person.fullName(),
 	}
 	const App = createRemixStub([
 		{
@@ -123,9 +123,9 @@ test('Link to chat is link to all chats if viewing it myself along with edit pro
 test('Link to chat is links to login if user is not logged in', async () => {
 	// 🐨 call setup here and delete the stuff setup handles
 	const user = {
-		imageId: faker.datatype.uuid(),
+		imageId: faker.string.uuid(),
 		username: faker.internet.userName(),
-		name: faker.name.fullName(),
+		name: faker.person.fullName(),
 	}
 	const App = createRemixStub([
 		{
@@ -148,9 +148,10 @@ test('Link to chat is links to login if user is not logged in', async () => {
 	const routeUrl = `/users/${user.username}/host`
 	render(<App initialEntries={[routeUrl]} />)
 
-	const messageLink = await screen.findByRole('link', {
-		name: /message/i,
-	})
+	const links = await screen.findAllByRole('link', { name: /message/i })
+	const messageLink = links.find(
+		l => l.getAttribute('title') === 'Login to message',
+	)
 	expect(messageLink).toHaveAttribute(
 		'href',
 		`/login?${new URLSearchParams({ redirectTo: routeUrl })}`,

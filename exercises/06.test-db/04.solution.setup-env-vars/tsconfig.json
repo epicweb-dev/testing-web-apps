@@ -1,20 +1,19 @@
 {
 	"include": [
-		"remix.env.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
-		"./test/setup-test-env.ts"
+		"**/*.cjs",
 	],
 	"compilerOptions": {
-		"lib": ["DOM", "DOM.Iterable", "ES2019"],
-		"types": ["vitest/globals"],
+		"lib": ["DOM", "DOM.Iterable", "ES2022"],
+		"types": [],
 		"isolatedModules": true,
 		"esModuleInterop": true,
 		"jsx": "react-jsx",
-		"module": "CommonJS",
-		"moduleResolution": "node",
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
 		"resolveJsonModule": true,
-		"target": "ES2019",
+		"target": "ES2022",
 		"strict": true,
 		"noImplicitAny": true,
 		"allowJs": true,
@@ -23,9 +22,17 @@
 		"paths": {
 			"~/*": ["./app/*"],
 			"prisma/*": ["./prisma/*"],
-			"test/*": ["./test/*"]
+			"tests/*": ["./tests/*"]
 		},
 		"skipLibCheck": true,
+		"allowImportingTsExtensions": true,
+		"typeRoots": ["./types", "./node_modules/@types"],
+
+		// Referenced project must have setting "composite": true.
+		"composite": true,
+		"disableReferencedProjectLoad": true,
+		"disableSolutionSearching": true,
+		"disableSourceOfProjectReferenceRedirect": true,
 
 		// Remix takes care of building everything in `remix build`.
 		"noEmit": true

@@ -1,6 +1,9 @@
 import { faker } from '@faker-js/faker'
 import bcrypt from 'bcryptjs'
 import { type PrismaClient } from '@prisma/client'
+import { memoizeUnique } from 'tests/memoize-unique.ts'
+
+const unique = memoizeUnique(faker.internet.userName)
 
 export async function downloadFile(
 	url: string,
@@ -22,11 +25,11 @@ export async function downloadFile(
 
 export function createContactInfo() {
 	return {
-		address: faker.address.streetAddress(),
-		city: faker.address.city(),
-		state: faker.address.state(),
-		zip: faker.address.zipCode(),
-		country: faker.address.country(),
+		address: faker.location.streetAddress(),
+		city: faker.location.city(),
+		state: faker.location.state(),
+		zip: faker.location.zipCode(),
+		country: faker.location.country(),
 		phone: faker.phone.number(),
 	}
 }
@@ -36,13 +39,13 @@ export function createUser({
 }: {
 	gender?: 'male' | 'female'
 } = {}) {
-	const firstName = faker.name.firstName(gender)
-	const lastName = faker.name.lastName()
+	const firstName = faker.person.firstName(gender)
+	const lastName = faker.person.lastName()
 
-	const username = faker.helpers.unique(faker.internet.userName, [
-		firstName.toLowerCase(),
-		lastName.toLowerCase(),
-	])
+	const username = unique({
+		firstName: firstName.toLowerCase(),
+		lastName: lastName.toLowerCase(),
+	})
 	return {
 		username,
 		name: `${firstName} ${lastName}`,
@@ -60,12 +63,15 @@ export function createDateRange({
 	end: Date
 	maxDays: number
 }) {
-	const randomStart = faker.date.between(start, end.getTime() - oneDay * 2)
+	const randomStart = faker.date.between({
+		from: start,
+		to: end.getTime() - oneDay * 2,
+	})
 	const endStartRange = randomStart.getTime() + oneDay
 	const endEndRange = Math.min(endStartRange + oneDay * maxDays, end.getTime())
 	return {
 		startDate: randomStart,
-		endDate: faker.date.between(endStartRange, endEndRange),
+		endDate: faker.date.between({ from: endStartRange, to: endEndRange }),
 	}
 }
 
@@ -75,14 +81,14 @@ export const lockifyFakerImage = (imageUrl: string) =>
 export function createBrand() {
 	return {
 		name: faker.company.name(),
-		description: faker.company.bs(),
+		description: faker.company.buzzPhrase(),
 	}
 }
 
 export function createShipModel() {
 	return {
 		name: faker.company.name(),
-		description: faker.company.bs(),
+		description: faker.company.buzzPhrase(),
 	}
 }
 
@@ -90,8 +96,8 @@ export function createStarport() {
 	return {
 		name: faker.company.name(),
 		description: faker.lorem.sentences(3),
-		latitude: Number(faker.address.latitude()),
-		longitude: Number(faker.address.longitude()),
+		latitude: Number(faker.location.latitude()),
+		longitude: Number(faker.location.longitude()),
 	}
 }
 
@@ -104,9 +110,9 @@ export function createPassword(username: string = faker.internet.userName()) {
 export function createShip() {
 	return {
 		name: faker.lorem.word(),
-		capacity: faker.datatype.number({ min: 1, max: 10 }),
+		capacity: faker.number.int({ min: 1, max: 10 }),
 		description: faker.lorem.sentences(3),
-		dailyCharge: faker.datatype.number({ min: 100, max: 1000 }),
+		dailyCharge: faker.number.int({ min: 100, max: 1000 }),
 	}
 }
 
@@ -126,10 +132,10 @@ export function createBooking({
 	})
 	const days = Math.ceil((endDate.getTime() - startDate.getTime()) / oneDay)
 
-	const createdAt = faker.date.between(
-		startDate.getTime() - oneDay * 10,
-		startDate.getTime() - oneDay,
-	)
+	const createdAt = faker.date.between({
+		from: startDate.getTime() - oneDay * 10,
+		to: startDate.getTime() - oneDay,
+	})
 	return {
 		createdAt,
 		updatedAt: createdAt,

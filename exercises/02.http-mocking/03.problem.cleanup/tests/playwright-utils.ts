@@ -1,1 +1,1 @@
-export { readEmail } from '../mocks/utils'
+export { readEmail } from '../mocks/utils.ts'

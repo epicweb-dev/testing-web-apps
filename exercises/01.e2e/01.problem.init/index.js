@@ -1,7 +1,7 @@
-require('dotenv/config')
+import 'dotenv/config'
 
 if (process.env.NODE_ENV === 'production') {
-	require('./server-build')
+	await import('./server-build/index.js')
 } else {
-	require('./server')
+	await import('./server/index.ts')
 }

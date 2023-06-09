@@ -1,9 +1,9 @@
 import * as Tabs from '@radix-ui/react-tabs'
 import { Form, Link } from '@remix-run/react'
-import clsx from 'clsx'
+import { clsx } from 'clsx'
 import { useRef, useState } from 'react'
-import { Spacer } from '~/components/spacer'
-import { ButtonLink } from '~/utils/forms'
+import { Spacer } from '~/components/spacer.tsx'
+import { ButtonLink } from '~/utils/forms.tsx'
 import styles from '../styles/index.module.css'
 
 export default function Index() {

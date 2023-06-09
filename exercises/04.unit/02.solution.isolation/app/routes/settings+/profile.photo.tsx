@@ -16,17 +16,17 @@ import {
 } from '@remix-run/react'
 import { useState } from 'react'
 import { z } from 'zod'
-import * as deleteImageRoute from '~/routes/resources+/delete-image'
-import { authenticator, requireUserId } from '~/utils/auth.server'
-import { prisma } from '~/utils/db.server'
+import * as deleteImageRoute from '~/routes/resources+/delete-image.tsx'
+import { authenticator, requireUserId } from '~/utils/auth.server.ts'
+import { prisma } from '~/utils/db.server.ts'
 import {
 	Button,
 	getFieldsFromSchema,
 	LabelButton,
 	preprocessFormData,
 	useForm,
-} from '~/utils/forms'
-import { getUserImgSrc } from '~/utils/misc'
+} from '~/utils/forms.tsx'
+import { getUserImgSrc } from '~/utils/misc.ts'
 
 const MAX_SIZE = 1024 * 1024 * 3 // 3MB
 

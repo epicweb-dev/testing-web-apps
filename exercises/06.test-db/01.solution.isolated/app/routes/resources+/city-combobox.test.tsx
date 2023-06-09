@@ -4,9 +4,9 @@ import path from 'path'
 import { type City } from '@prisma/client'
 import { unstable_createRemixStub as createRemixStub } from '@remix-run/testing'
 import { act, render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { userEvent } from '~/utils/user-event.cjs'
 import * as React from 'react'
-import { test } from 'vitest'
+import { afterAll, afterEach, beforeAll, expect, test, vi } from 'vitest'
 
 const databaseFile = `./prisma/test/data.db`
 process.env.DATABASE_PATH = path.join(process.cwd(), databaseFile)
@@ -20,17 +20,20 @@ beforeAll(async () => {
 })
 
 afterEach(async () => {
-	const { db } = await import('~/utils/db.server')
+	const { db } = await import('~/utils/db.server.ts')
 	db.exec(`DELETE FROM city;`)
 })
 
 afterAll(async () => {
+	const { db, prisma } = await import('~/utils/db.server.ts')
+	db.close()
+	await prisma.$disconnect()
 	await fsExtra.remove(process.env.DATABASE_PATH)
 })
 
 test('allows you to search for cities in the database', async () => {
-	const { db } = await import('~/utils/db.server')
-	const { CityCombobox, loader } = await import('./city-combobox')
+	const { db } = await import('~/utils/db.server.ts')
+	const { CityCombobox, loader } = await import('./city-combobox.tsx')
 
 	const insert = db.prepare(/*sql*/ `
 		INSERT INTO city (id, name, country, latitude, longitude, updatedAt, createdAt)
@@ -93,7 +96,6 @@ test('allows you to search for cities in the database', async () => {
 		{
 			id: 'resources-city-combobox',
 			path: '/resources/city-combobox',
-			// @ts-expect-error - this is a bug in the types that will be fixed soon.
 			loader,
 		},
 	])

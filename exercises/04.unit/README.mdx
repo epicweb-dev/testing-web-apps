@@ -35,7 +35,7 @@ it would be more efficient to write smaller tests that focus on the
 `validatePassword` function itself. For example:
 
 ```ts
-import { test } from 'vitest'
+import { expect, test } from 'vitest'
 import { validatePassword } from './validatePassword'
 
 test('returns false for passwords shorter than 8 characters', () => {

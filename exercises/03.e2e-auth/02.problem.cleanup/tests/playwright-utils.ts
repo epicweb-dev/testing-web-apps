@@ -1,10 +1,10 @@
-import { getPasswordHash } from '~/utils/auth.server'
-import { prisma } from '~/utils/db.server'
-import { createContactInfo, createUser } from '../prisma/seed-utils'
+import { getPasswordHash } from '~/utils/auth.server.ts'
+import { prisma } from '~/utils/db.server.ts'
+import { createContactInfo, createUser } from '../prisma/seed-utils.ts'
 
 // 🐨 export a dataCleanup object with a users property that is a Set<string>
 
-export { readEmail } from '../mocks/utils'
+export { readEmail } from '../mocks/utils.ts'
 
 export async function insertNewUser({ password }: { password?: string } = {}) {
 	const userData = createUser()

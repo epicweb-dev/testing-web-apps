@@ -1,7 +1,7 @@
 import { json } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
-import { prisma } from '~/utils/db.server'
-import { getUserImgSrc } from '~/utils/misc'
+import { prisma } from '~/utils/db.server.ts'
+import { getUserImgSrc } from '~/utils/misc.ts'
 
 export async function loader() {
 	const users = await prisma.user.findMany({

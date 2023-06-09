@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test'
 // import { parse } from 'cookie'
 // import { authenticator } from '~/utils/auth.server'
 // import { commitSession, getSession } from '~/utils/session.server'
-import { createContactInfo, createUser } from '../../prisma/seed-utils'
+import { createContactInfo, createUser } from '../../prisma/seed-utils.ts'
 // import { insertNewUser } from '../playwright-utils'
 
 // 🐨 get the baseURL from the callback argument (like we do with the page)

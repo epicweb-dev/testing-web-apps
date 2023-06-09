@@ -2,16 +2,16 @@
 // and make our own "test" object.
 import { test, type Page } from '@playwright/test'
 import { parse } from 'cookie'
-import { authenticator, getPasswordHash } from '~/utils/auth.server'
-import { prisma } from '~/utils/db.server'
-import { commitSession, getSession } from '~/utils/session.server'
-import { createContactInfo, createUser } from '../prisma/seed-utils'
+import { authenticator, getPasswordHash } from '~/utils/auth.server.ts'
+import { prisma } from '~/utils/db.server.ts'
+import { commitSession, getSession } from '~/utils/session.server.ts'
+import { createContactInfo, createUser } from '../prisma/seed-utils.ts'
 
 export const dataCleanup = {
 	users: new Set<string>(),
 }
 
-export { readEmail } from '../mocks/utils'
+export { readEmail } from '../mocks/utils.ts'
 
 export async function insertNewUser({ password }: { password?: string } = {}) {
 	const userData = createUser()

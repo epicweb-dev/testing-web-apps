@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker'
-import { encrypt, decrypt } from './encryption.server'
+import { encrypt, decrypt } from './encryption.server.ts'
+import { expect, test } from 'vitest'
 
 // 🐨 create the variable to store the original value of process.env.ENCRYPTION_SECRET
 

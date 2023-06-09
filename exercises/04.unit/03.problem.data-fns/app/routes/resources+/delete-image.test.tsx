@@ -13,6 +13,7 @@
 // 🐨 create a RESOURCE_URL variable here that concatenates the BASE_URL with
 // the ROUTE_PATH
 
+// @ts-ignore - 🐨 'test' function will be defined once you import it - remove this line
 test('allows users to delete their own images', async () => {
 	// 💰 this isn't a prisma workshop, so I'm going to give you the user:
 	// const userData = createUser()
