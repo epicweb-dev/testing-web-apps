@@ -27,7 +27,7 @@ make this work, we need a unique and clean database for each test.
 We're going to iterate to a global setup solution. To start though, let's just
 get this test passing by itself. We need to make sure we set the proper
 environment variables before importing
-the <InlineFile file="app/utils/db.server" /> file, otherwise our test will
+the <InlineFile file="app/utils/db.server.ts" /> file, otherwise our test will
 connect to the wrong database, so this will involve moving some imports from
 static imports at the top of the file to dynamic imports within our test.
 
