@@ -1,3 +1,5 @@
+# This workshop has been updated: [full-stack-testing](https://github.com/epicweb-dev/full-stack-testing)
+
 <div>
   <h1 align="center"><a href="https://kentcdodds.com/workshops/testing-web-applications">🧪 Testing Web Apps</a></h1>
   <strong>
